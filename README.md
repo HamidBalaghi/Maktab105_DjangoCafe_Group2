@@ -33,12 +33,6 @@ order management, and more.
 
 ## Project Delivery Phases
 
-🥇 **First Phase:**
-
-- Create a private repository on GitHub named `Maktab105_DjangoCafe_Group1`.
-- Invite group members and teaching team.
-- Define database models and project structure.
-
 ## Database Models
 
 - User
