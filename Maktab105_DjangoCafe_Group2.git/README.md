@@ -29,13 +29,6 @@ This project aims to develop a full-stack web application for a coffee shop usin
    - Change Order Status
    - Manage Cafe
 
-## Project Delivery Phases
-
-🥇 **First Phase:**
-- Create a private repository on GitHub named `Maktab105_DjangoCafe_Group1`.
-- Invite group members and teaching team.
-- Define database models and project structure.
-
 ## Database Models
 
 - User
