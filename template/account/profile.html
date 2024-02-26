@@ -24,6 +24,10 @@
             filter: brightness(70%);
         }
 
+        .swiper-slide.slide-0 {
+            background-image: url('https://i0.wp.com/luxexpose.com/wp-content/uploads/2022/07/LuxExpose-Devocion_FrontYork_3.jpg?w=1000&ssl=1');
+        }
+
         .swiper-slide.slide-1 {
             background-image: url('https://i0.wp.com/luxexpose.com/wp-content/uploads/2022/07/LuxExpose-Devocion_FrontYork_3.jpg?w=1000&ssl=1');
         }
@@ -54,7 +58,7 @@
 </head>
 <body class="bg-gray-100">
 <!-- Navbar -->
-<nav id="navbar" class="py-4"
+<nav id="navbar" class="py-6"
      style="background-image: url('https://cdn.shopify.com/s/files/1/0578/5337/8725/files/Whole_Bean_COffee_1024x1024.jpg?v=1692494257'); background-size: cover; background-position: center;">
     <div class="container mx-auto flex justify-between items-center px-4">
         <!-- Brand/logo -->
@@ -62,10 +66,11 @@
 
         <!-- Navigation links -->
         <ul class="flex space-x-4">
-            <li><a href="#" class="text-white hover:text-gray-300">Home</a></li>
-            <li><a href="#" class="text-white hover:text-gray-300">Menu</a></li>
-            <li><a href="#" class="text-white hover:text-gray-300">About</a></li>
-            <li><a href="#" class="text-white hover:text-gray-300">Contact</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300" onclick="showSlide('slide-0')">Home</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300" onclick="showSlide('slide-1')">Menu</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300" onclick="showSlide('slide-3')">About</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300" onclick="showSlide('slide-2')">Contact</a></li>
+
         </ul>
 
         <!-- Profile section -->
@@ -90,16 +95,61 @@
 </nav>
 
 <!-- Slider Container -->
+
 <div class="swiper-container">
     <div class="swiper-wrapper">
+        <div class="swiper-slide slide-0">
+            <div class="swiper-slide slide-0 flex items-center justify-center text-white">
+                <div class="text-center">
+                    <div class="max-w-md w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  p-8 rounded shadow-lg">
+                        <h2 class="text-2xl font-bold text-center mb-4">Login to Your Account</h2>
+                        <form class="space-y-4 " action="#" method="POST">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
+                                <input id="email" name="email" type="email" autocomplete="email" required
+                                       class="mt-1 block w-full  pl-2  bg-white text-gray-800  rounded-md border-gray-700 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+                                <input id="password" name="password" type="password" autocomplete="current-password"
+                                       required
+                                       class="mt-1 block w-full pl-2 bg-white  text-gray-800  rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <input id="remember_me" name="remember_me" type="checkbox"
+                                           class="h-4 w-4 mr-4 p-r4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                    <label for="remember_me" class="ml-2 block text-sm text-gray-900 ">Remember
+                                        me  </label>
+                                </div>
+                                <div class="text-sm">
+                                    <a href="#" class="font-medium  text-white hover:text-gray-800">  Forgot your
+                                        password?</a>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                        class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Sign
+                                    in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="swiper-slide slide-1 flex items-center justify-center text-white ">
             <div class="text-center">
                 <h2 class="text-4xl font-bold mb-4">Discover Our Cafe Products</h2>
-                <a href="#" class="block px-4 py-2 bg-yellow-500 text-white hover:bg-yellow-400 rounded-full mb-2">Hot
+                <a href="#" onclick="showSlide('slide-4')"
+                   class="block px-4 py-2 bg-yellow-500 text-white hover:bg-yellow-400 rounded-full mb-2">Hot
                     Coffee</a>
-                <a href="#" class="block px-4 py-2 bg-blue-500 text-white hover:bg-blue-400 rounded-full mb-2">Cold
+                <a href="#" onclick="showSlide('slide-5')"
+                   class="block px-4 py-2 bg-blue-500 text-white hover:bg-blue-400 rounded-full mb-2">Cold
                     Coffee</a>
-                <a href="#" class="block px-4 py-2 bg-pink-500 text-white hover:bg-pink-400 rounded-full mb-8">Delicious
+                <a href="#" onclick="showSlide('slide-6')"
+                   class="block px-4 py-2 bg-pink-500 text-white hover:bg-pink-400 rounded-full mb-8">Delicious
                     Cakes</a>
                 <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-md inline-block mt-4 hover:bg-gray-200">Shop
                     Now</a>
@@ -171,111 +221,157 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-slide slide-5"><div class="swiper-slide slide-5 flex items-center justify-center text-white">
-    <div class="text-center">
-        <h2 class="text-4xl font-bold mb-4">Cold Coffee Menu</h2>
-        <div class="grid grid-cols-2 gap-6">
-            <!-- Menu Item 1: Iced Coffee -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Iced Coffee</h3>
-                <p class="mb-2">Regular - $3.50</p>
-                <p class="mb-4">Large - $4.00</p>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 2: Frappuccino -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Frappuccino</h3>
-                <p class="mb-2">Regular - $4.50</p>
-                <p class="mb-4">Large - $5.00</p>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 3: Cold Brew -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Cold Brew</h3>
-                <p class="mb-2">Regular - $4.00</p>
-                <p class="mb-4">Large - $4.50</p>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 4: Iced Latte -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Iced Latte</h3>
-                <p class="mb-2">Regular - $4.50</p>
-                <p class="mb-4">Large - $5.00</p>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-        <div class="swiper-slide slide-6"><div class="swiper-slide slide-6 flex items-center justify-center text-white">
-    <div class="text-center">
-        <h2 class="text-4xl font-bold mb-4">Cake Menu</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <!-- Menu Item 1: Chocolate Cake -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Chocolate Cake</h3>
-                <p class="mb-2">Slice - $3.50</p>
-                <p class="mb-4">Whole - $30.00</p>
-                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 2: Red Velvet Cake -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Red Velvet Cake</h3>
-                <p class="mb-2">Slice - $4.00</p>
-                <p class="mb-4">Whole - $35.00</p>
-                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 3: Carrot Cake -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Carrot Cake</h3>
-                <p class="mb-2">Slice - $4.50</p>
-                <p class="mb-4">Whole - $40.00</p>
-                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
-            </div>
-            <!-- Menu Item 4: Cheesecake -->
-            <div class="bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-xl font-semibold mb-2">Cheesecake</h3>
-                <p class="mb-2">Slice - $4.00</p>
-                <p class="mb-4">Whole - $35.00</p>
-                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
+        <div class="swiper-slide slide-5">
+            <div class="swiper-slide slide-5 flex items-center justify-center text-white">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold mb-4">Cold Coffee Menu</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <!-- Menu Item 1: Iced Coffee -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Iced Coffee</h3>
+                            <p class="mb-2">Regular - $3.50</p>
+                            <p class="mb-4">Large - $4.00</p>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 2: Frappuccino -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Frappuccino</h3>
+                            <p class="mb-2">Regular - $4.50</p>
+                            <p class="mb-4">Large - $5.00</p>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 3: Cold Brew -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Cold Brew</h3>
+                            <p class="mb-2">Regular - $4.00</p>
+                            <p class="mb-4">Large - $4.50</p>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 4: Iced Latte -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Iced Latte</h3>
+                            <p class="mb-2">Regular - $4.50</p>
+                            <p class="mb-4">Large - $5.00</p>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
+        <div class="swiper-slide slide-6">
+            <div class="swiper-slide slide-6 flex items-center justify-center text-white">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold mb-4">Cake Menu</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <!-- Menu Item 1: Chocolate Cake -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Chocolate Cake</h3>
+                            <p class="mb-2">Slice - $3.50</p>
+                            <p class="mb-4">Whole - $30.00</p>
+                            <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 2: Red Velvet Cake -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Red Velvet Cake</h3>
+                            <p class="mb-2">Slice - $4.00</p>
+                            <p class="mb-4">Whole - $35.00</p>
+                            <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 3: Carrot Cake -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Carrot Cake</h3>
+                            <p class="mb-2">Slice - $4.50</p>
+                            <p class="mb-4">Whole - $40.00</p>
+                            <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 4: Cheesecake -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Cheesecake</h3>
+                            <p class="mb-2">Slice - $4.00</p>
+                            <p class="mb-4">Whole - $35.00</p>
+                            <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Add more slides here -->
     </div>
 
+
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
-</div>
+    <!-- JavaScript for toggling dropdown and modal -->
 
-<!-- JavaScript for toggling dropdown and modal -->
-<script>
-    function toggleDropdown(id) {
-        var dropdown = document.getElementById(id);
-        dropdown.classList.toggle('hidden');
-    }
+    <!-- JavaScript for toggling dropdown and modal -->
+    <script>
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            dropdown.classList.toggle('hidden');
+        }
 
-    function enlargePhoto() {
-        var modal = document.getElementById('modal');
-        modal.classList.remove('hidden');
-    }
-</script>
+        function enlargePhoto() {
+            var modal = document.getElementById('modal');
+            modal.classList.remove('hidden');
+        }
+    </script>
 
-<!-- Include Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<!-- Initialize Swiper -->
-<script>
-    var swiper = new Swiper('.swiper-container', {
-        // Optional parameters
-        direction: 'vertical', // Slide vertically
-        loop: true,
-        // If you need pagination
-        pagination: {
-            el: '.swiper-pagination',
-        },
-    });
-</script>
+    <!-- Include Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper; // Declare swiper globally
+
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            dropdown.classList.toggle('hidden');
+        }
+
+        function enlargePhoto() {
+            var modal = document.getElementById('modal');
+            modal.classList.remove('hidden');
+        }
+
+        // Function to show a specific slide by its class name
+        function showSlide(className) {
+            // Get all slides
+            var slides = document.querySelectorAll('.swiper-slide');
+            // Loop through slides to find the one with the specified class name
+            for (var i = 0; i < slides.length; i++) {
+                var slide = slides[i];
+                // If the slide has the specified class name
+                if (slide.classList.contains(className)) {
+                    // Get its index and use Swiper's slideTo method to show it
+                    var index = parseInt(slide.getAttribute('data-swiper-slide-index'));
+                    swiper.slideTo(index);
+                    // Break the loop since we found the slide
+                    break;
+                }
+            }
+        }
+
+        // Initialize Swiper after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            swiper = new Swiper('.swiper-container', {
+                // Optional parameters
+                direction: 'vertical', // Slide vertically
+                loop: true,
+                // If you need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        });
+    </script>
+
 </body>
+
 </html>
