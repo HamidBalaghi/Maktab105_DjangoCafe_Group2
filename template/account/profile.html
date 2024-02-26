@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar with Profile Dropdown</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Include Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* Custom style for the slider */
+        .swiper-container {
+            width: 100%;
+            height: 100vh; /* Set desired height here */
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(70%);
+        }
+
+        .swiper-slide.slide-1 {
+            background-image: url('https://i0.wp.com/luxexpose.com/wp-content/uploads/2022/07/LuxExpose-Devocion_FrontYork_3.jpg?w=1000&ssl=1');
+        }
+
+        .swiper-slide.slide-2 {
+            background-image: url('https://i0.wp.com/luxexpose.com/wp-content/uploads/2022/07/LuxExpose-Devocion_FrontYork_5.jpg?w=1000&ssl=1');
+        }
+
+        .swiper-slide.slide-3 {
+            background-image: url('https://i0.wp.com/luxexpose.com/wp-content/uploads/2022/07/LuxExpose-Devocion_FrontYork_4.jpg?w=1000&ssl=1');
+        }
+
+        .swiper-slide.slide-4 {
+            background-image: url('https://media.istockphoto.com/id/1177900338/photo/cup-of-espresso-with-coffee-beans.jpg?s=612x612&w=0&k=20&c=5cAWrCndkNTzBkcFKFqEn3eXvEwBT30uMRkSogaH-oY=');
+        }
+
+        .swiper-slide.slide-5 {
+            background-image: url('https://images.immediate.co.uk/production/volatile/sites/2/2021/11/Caramel-iced-coffee-f73307b.png?quality=90&resize=556,505');
+        }
+
+        .swiper-slide.slide-6 {
+            background-image: url('https://www.myjewishlearning.com/wp-content/uploads/2009/12/coffeecake.jpg');
+        }
+
+        /* Make text brighter and more colorful */
+
+    </style>
+</head>
+<body class="bg-gray-100">
+<!-- Navbar -->
+<nav id="navbar" class="py-4"
+     style="background-image: url('https://cdn.shopify.com/s/files/1/0578/5337/8725/files/Whole_Bean_COffee_1024x1024.jpg?v=1692494257'); background-size: cover; background-position: center;">
+    <div class="container mx-auto flex justify-between items-center px-4">
+        <!-- Brand/logo -->
+        <a href="#" class="text-white text-xl font-bold">Coffee Shop</a>
+
+        <!-- Navigation links -->
+        <ul class="flex space-x-4">
+            <li><a href="#" class="text-white hover:text-gray-300">Home</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300">Menu</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300">About</a></li>
+            <li><a href="#" class="text-white hover:text-gray-300">Contact</a></li>
+        </ul>
+
+        <!-- Profile section -->
+        <div class="relative">
+            <button onclick="toggleDropdown('profile-dropdown')"
+                    class="flex items-center space-x-2 text-white focus:outline-none">
+                <img src="Robertpestonwebsite-1536x863.jpg" id="profile-image" alt="Profile Image"
+                     class="rounded-full h-8 w-8">
+                <span class="text-gray-300">Username</span>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="profile-dropdown"
+                 class="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg py-1 hidden">
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Email</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Basket</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Login</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Sign in</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Slider Container -->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide slide-1 flex items-center justify-center text-white ">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-4">Discover Our Cafe Products</h2>
+                <a href="#" class="block px-4 py-2 bg-yellow-500 text-white hover:bg-yellow-400 rounded-full mb-2">Hot
+                    Coffee</a>
+                <a href="#" class="block px-4 py-2 bg-blue-500 text-white hover:bg-blue-400 rounded-full mb-2">Cold
+                    Coffee</a>
+                <a href="#" class="block px-4 py-2 bg-pink-500 text-white hover:bg-pink-400 rounded-full mb-8">Delicious
+                    Cakes</a>
+                <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-md inline-block mt-4 hover:bg-gray-200">Shop
+                    Now</a>
+            </div>
+        </div>
+        <div class="swiper-slide slide-2 flex items-center justify-center text-white">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-4">Contact Us</h2>
+                <a href="#" class="block px-4 py-2 bg-purple-500 text-white hover:bg-yellow-400 rounded-full mb-2">Location:
+                    123 Main Street, Cityville</a>
+                <a href="#" class="block px-4 py-2 bg-red-500 text-white hover:bg-blue-400 rounded-full mb-2">Phone:
+                    123-456-7890</a>
+            </div>
+        </div>
+        <div class="swiper-slide slide-3 flex items-center justify-center text-white">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-4">About Us</h2>
+                <p class="mb-4">Coffee Shop is committed to providing the finest coffee experience to our customers.</p>
+                <p class="mb-4">We have been serving the community since 20XX with our carefully selected coffee beans
+                    and expertly crafted beverages.</p>
+                <p class="mb-8">Visit us today and experience the warmth of our cafe ambiance and the richness of our
+                    coffee.</p>
+                <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-md inline-block mt-4 hover:bg-gray-200">Learn
+                    More</a>
+            </div>
+        </div>
+        <div class="swiper-slide slide-4">
+            <div class="swiper-slide slide-4 flex items-center justify-center text-white">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold mb-4">Hot Coffee Menu</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Menu Item 1 -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Espresso</h3>
+                            <p class="mb-2">Single Shot - $2.50</p>
+                            <p class="mb-4">Double Shot - $3.50</p>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400">Add to
+                                Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 2 -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Cappuccino</h3>
+                            <p class="mb-2">Regular - $4.00</p>
+                            <p class="mb-4">Large - $4.50</p>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400">Add to
+                                Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 3 -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Latte</h3>
+                            <p class="mb-2">Regular - $4.50</p>
+                            <p class="mb-4">Large - $5.00</p>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400">Add to
+                                Cart
+                            </button>
+                        </div>
+                        <!-- Menu Item 4 -->
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-2">Americano</h3>
+                            <p class="mb-2">Regular - $3.00</p>
+                            <p class="mb-4">Large - $3.50</p>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400">Add to
+                                Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide slide-5"><div class="swiper-slide slide-5 flex items-center justify-center text-white">
+    <div class="text-center">
+        <h2 class="text-4xl font-bold mb-4">Cold Coffee Menu</h2>
+        <div class="grid grid-cols-2 gap-6">
+            <!-- Menu Item 1: Iced Coffee -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Iced Coffee</h3>
+                <p class="mb-2">Regular - $3.50</p>
+                <p class="mb-4">Large - $4.00</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 2: Frappuccino -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Frappuccino</h3>
+                <p class="mb-2">Regular - $4.50</p>
+                <p class="mb-4">Large - $5.00</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 3: Cold Brew -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Cold Brew</h3>
+                <p class="mb-2">Regular - $4.00</p>
+                <p class="mb-4">Large - $4.50</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 4: Iced Latte -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Iced Latte</h3>
+                <p class="mb-2">Regular - $4.50</p>
+                <p class="mb-4">Large - $5.00</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+        <div class="swiper-slide slide-6"><div class="swiper-slide slide-6 flex items-center justify-center text-white">
+    <div class="text-center">
+        <h2 class="text-4xl font-bold mb-4">Cake Menu</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Menu Item 1: Chocolate Cake -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Chocolate Cake</h3>
+                <p class="mb-2">Slice - $3.50</p>
+                <p class="mb-4">Whole - $30.00</p>
+                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 2: Red Velvet Cake -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Red Velvet Cake</h3>
+                <p class="mb-2">Slice - $4.00</p>
+                <p class="mb-4">Whole - $35.00</p>
+                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 3: Carrot Cake -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Carrot Cake</h3>
+                <p class="mb-2">Slice - $4.50</p>
+                <p class="mb-4">Whole - $40.00</p>
+                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
+            </div>
+            <!-- Menu Item 4: Cheesecake -->
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">Cheesecake</h3>
+                <p class="mb-2">Slice - $4.00</p>
+                <p class="mb-4">Whole - $35.00</p>
+                <button class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-400">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+        <!-- Add more slides here -->
+    </div>
+
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+
+<!-- JavaScript for toggling dropdown and modal -->
+<script>
+    function toggleDropdown(id) {
+        var dropdown = document.getElementById(id);
+        dropdown.classList.toggle('hidden');
+    }
+
+    function enlargePhoto() {
+        var modal = document.getElementById('modal');
+        modal.classList.remove('hidden');
+    }
+</script>
+
+<!-- Include Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        direction: 'vertical', // Slide vertically
+        loop: true,
+        // If you need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    });
+</script>
+</body>
+</html>
