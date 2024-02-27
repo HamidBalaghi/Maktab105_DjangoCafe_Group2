@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="flex flex-col h-screen">
+    <div class="bg-gray-800 flex justify-between text-white p-4 text-lg font-bold">
+        {{ user.get_full_name }} Cafe Maktab
+    </div>
+
+    <div class="flex-grow overflow-y-auto p-4">
+        <table class="w-full border border-gray-200">
+            <thead>
+            <tr class="text-gray-500 font-bold">
+                <th class="p-2 text-center">Product Name</th>
+                <th class="p-2 text-center">Price/Unit</th>
+                <th class="p-2 text-center">Quantity</th>
+                <th class="p-2 text-center">Total Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td class="p-2 text-center">{{ order.order_item.product.name }}</td>
+                    <td class="p-2 text-center">{{ order.order_item.product.get_price }}</td>
+                    <td class="p-2 text-center flex items-center justify-center">
+                        <button class="bg-gray-200 border hover:bg-gray-300 text-gray-800 font-bold py-1 px-3 rounded-l">
+                            -
+                        </button>
+                        <span class="px-4">{{ order.order_item.quantity }}</span>
+                        <button class="bg-gray-200 border hover:bg-gray-300 text-gray-800 font-bold py-1 px-3 rounded-r">
+                            +
+                        </button>
+                    </td>
+                    <td class="p-2 text-center">
+                        {{ order.order_item.quantity * order.order_item.product.get_price }}</td>
+                </tr>
+
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="text-right font-bold p-2">Total Price:</td>
+                <td class="p-2 text-right font-bold">{{ calculate_total_price(orders) }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="flex justify-end p-4">
+            <button type="button"
+                    class="bg-blue-500 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
+                Pay Now
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
