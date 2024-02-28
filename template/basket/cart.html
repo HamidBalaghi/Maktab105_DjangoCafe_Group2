@@ -17,7 +17,7 @@
             <tr class="text-gray-500 font-bold">
                 <th class="p-2 text-center">Product Name</th>
                 <th class="p-2 text-center">Price/Unit</th>
-                <th class="p-2 text-center">Quantity</th>
+                <th class="pl-9 text-center">Quantity</th>
                 <th class="p-2 text-center">Total Price</th>
             </tr>
             </thead>
@@ -45,7 +45,7 @@
             {% endfor %}
             <tr>
                 <td colspan="3" class="text-right font-bold p-2">Total Price:</td>
-                <td class="p-2 text-right font-bold">{{ calculate_total_price(orders) }}</td>
+                <td class="text-right font-bold pr-10">{{ calculate_total_price(orders) }}</td>
             </tr>
             </tbody>
         </table>
