@@ -9,13 +9,11 @@
     <title>Document</title>
 </head>
 <body >
-    <div class=" flex justify-center items-center h-60 bg-[url('../media/images/head.jpg')] bg-cover bg-no-repeat bg-center">
-        
+    <div class=" flex justify-center items-center h-60 bg-[url('../media/images/head.jpg')] bg-cover bg-no-repeat bg-center"> 
         <h1 class="text-5xl font-bold">WELCOME TO CATEGORY PAGE</h1>
     </div>
-    <div class="  bg-[url('../media/images/coffee-shop.jpg')] bg-cover bg-no-repeat bg-center my-5 ">
 
-    
+    <div class="  bg-[url('../media/images/coffee-shop.jpg')] bg-cover bg-no-repeat bg-center my-5 ">
         <div class="relative grid grid-cols-3 w-3/4 h-screen m-auto p-5 gap-5 justify-around items-center ">
             {% for item in category_list %}
             <a href="{% url 'products_list' item.id %}">>
@@ -28,9 +26,7 @@
                 </div>
             </a>    
             {% endfor %}
-
         </div>
     </div>
- 
 </body>
 </html>
