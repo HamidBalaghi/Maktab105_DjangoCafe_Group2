@@ -1,0 +1,362 @@
+<nav
+    class="bg-gray-900 relative px-4 py-4 flex justify-between items-center bg-opacity-20 shadow-lg backdrop-filter backdrop-blur-lg backdrop-contrast-100 border-black border-opacity-20 rounded-lg sticky top-0 z-50"
+>
+    <div class="text-3xl font-bold leading-none">
+        <div class="flex items-center justify-between">
+            <div>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EnNcsqmiSJkX_GqEQbyS1m5fwd3rOia6AQ&usqp=CAU"
+                    alt="Profile Image"
+                    class="w-16 h-16 rounded-full cursor-pointer"
+                    onclick="redirectToLogin()"
+                />
+            </div>
+            <!-- {% if user.is_authentication %} -->
+            <div class="relative">
+                <button class="flex items-center focus:outline-none">
+                    <span class="mr-2 font-bold text-width">Username</span>
+                    <svg
+                        class="w-4 h-4 fill-current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                    >
+                        <path
+                            d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm10 2a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-10-8h12v2H8V2z"
+                        />
+                    </svg>
+                </button>
+                <div
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10 hidden"
+                >
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        onclick="redirectToChangePassword()"
+                        >Change Password</a
+                    >
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        onclick="redirectToChangeImg()"
+                        >Change Image</a
+                    >
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        onclick="redirectToBasket()"
+                        >Basket</a
+                    >
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        onclick="redirectToSingOut()"
+                        >Sing out</a
+                    >
+                </div>
+            </div>
+            <!--  {% endif %} -->
+        </div>
+    </div>
+    {% comment %}mobile view{% endcomment %}
+    <div class="lg:hidden">
+        <button class="navbar-burger flex items-center text-blue-600 p-3">
+            <svg
+                class="block h-4 w-4 fill-current"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <title>Mobile menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+        </button>
+    </div>
+    <ul
+        class="min-[0px]:hidden max-[720px]:hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6"
+    >
+        <li>
+            <a class="text-sm text-gray-400 hover:text-gray-500" href="#"
+                >Home</a
+            >
+        </li>
+        <li class="text-gray-300">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+            ></svg>
+        </li>
+        <li>
+            <a class="text-sm text-gray-400 hover:text-gray-500" href="#"
+                >About Us</a
+            >
+        </li>
+        <li class="text-gray-300">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+            ></svg>
+        </li>
+        <li>
+            <a class="text-sm text-gray-400 hover:text-gray-500" href="#"
+                >Services</a
+            >
+        </li>
+        <li class="text-gray-300">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+            ></svg>
+        </li>
+        <li>
+            <a class="text-sm text-gray-400 hover:text-gray-500" href="#"
+                >Pricing</a
+            >
+        </li>
+        <li class="text-gray-300">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+            ></svg>
+        </li>
+        <li>
+            <a class="text-sm text-gray-400 hover:text-gray-500" href="#"
+                >Contact</a
+            >
+        </li>
+    </ul>
+    <div class="hidden lg:block">
+        <form role="form" class="relative flex rounded-full mt-4">
+            <input
+                type="text"
+                placeholder="enter your search here"
+                class="text-sm p-2 rounded-full flex-1 text-gray-700 focus:outline-none bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70 border border-gray-100"
+            />
+            <button
+                class="me-2 ms-2 ps-2 pe-2 bg-gray-200 text-black rounded-full text-sm hover:bg-indigo-400 focus:bg-indigo-600 focus:outline-none"
+            >
+                Search
+            </button>
+        </form>
+    </div>
+</nav>
+<div
+    class="navbar-menu relative hidden z-50 bg-gray-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50"
+>
+    <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+    <nav
+        class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 overflow-y-auto bg-gray-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50"
+    >
+        <div class="flex items-center mb-8">
+            <a class="mr-auto text-3xl font-bold leading-none" href="#">
+                {% comment %}your logo{% endcomment %}
+                <div class="flex items-center justify-between">
+                    <div>
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EnNcsqmiSJkX_GqEQbyS1m5fwd3rOia6AQ&usqp=CAU"
+                            alt="Profile Image"
+                            class="w-16 h-16 rounded-full cursor-pointer"
+                            onclick="redirectToLogin()"
+                        />
+                    </div>
+                    <!-- {% if user.is_authentication %} -->
+                    <div class="relative">
+                        <button class="flex items-center focus:outline-none">
+                            <span class="mr-2 font-bold text-width"
+                                >Username</span
+                            >
+                            <svg
+                                class="w-4 h-4 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm10 2a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-10-8h12v2H8V2z"
+                                />
+                            </svg>
+                        </button>
+                        <div
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10 hidden"
+                        >
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                onclick="redirectToChangePassword()"
+                                >Change Password</a
+                            >
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                onclick="redirectToChangeImg()"
+                                >Change Image</a
+                            >
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                onclick="redirectToBasket()"
+                                >Basket</a
+                            >
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                                onclick="redirectToSingOut()"
+                                >Sing out</a
+                            >
+                        </div>
+                    </div>
+                    <!-- {% endif %} -->
+                </div>
+            </a>
+            <button class="navbar-close">
+                <svg
+                    class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                </svg>
+            </button>
+        </div>
+
+        <div>
+            <ul class="">
+                <li class="mb-1">
+                    <a
+                        class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                        href="#"
+                        >Home</a
+                    >
+                </li>
+                <li class="mb-1">
+                    <a
+                        class="block p-4 text-sm font-semibold text-gray-400 rounded"
+                        href="#"
+                        >About Us</a
+                    >
+                </li>
+                <li class="mb-1">
+                    <a
+                        class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                        href="#"
+                        >Services</a
+                    >
+                </li>
+                <li class="mb-1">
+                    <a
+                        class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                        href="#"
+                        >Pricing</a
+                    >
+                </li>
+                <li class="mb-1">
+                    <a
+                        class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                        href="#"
+                        >Contact</a
+                    >
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-auto">
+            <div class="">
+                <form role="form" class="relative flex rounded-full mt-4">
+                    <input
+                        type="text"
+                        placeholder="enter your search here"
+                        class="text-sm p-2 rounded-full flex-1 text-gray-700 focus:outline-none bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70 border border-gray-100"
+                    />
+                    <button
+                        class="me-2 ms-2 ps-2 pe-2 bg-gray-200 text-black rounded-full text-sm hover:bg-indigo-400 focus:bg-indigo-600 focus:outline-none"
+                    >
+                        Search
+                    </button>
+                </form>
+            </div>
+            <p class="my-4 text-xs text-center text-gray-400">
+                <span>Group 2 © 2024</span>
+            </p>
+        </div>
+    </nav>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const burger = document.querySelectorAll(".navbar-burger");
+        const menu = document.querySelectorAll(".navbar-menu");
+
+        if (burger.length && menu.length) {
+            for (var i = 0; i < burger.length; i++) {
+                burger[i].addEventListener("click", function () {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle("hidden");
+                    }
+                });
+            }
+        }
+
+        const close = document.querySelectorAll(".navbar-close");
+        const backdrop = document.querySelectorAll(".navbar-backdrop");
+
+        if (close.length) {
+            for (var i = 0; i < close.length; i++) {
+                close[i].addEventListener("click", function () {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle("hidden");
+                    }
+                });
+            }
+        }
+
+        if (backdrop.length) {
+            for (var i = 0; i < backdrop.length; i++) {
+                backdrop[i].addEventListener("click", function () {
+                    for (var j = 0; j < menu.length; j++) {
+                        menu[j].classList.toggle("hidden");
+                    }
+                });
+            }
+        }
+    });
+    function redirectToLogin() {
+        window.location.href = "http://127.0.0.1:8000/login/";
+    }
+    function redirectToChangePassword() {
+        window.location.href = "http://127.0.0.1:8000/change_password/";
+    }
+    function redirectToBasket() {
+        window.location.href = "http://127.0.0.1:8000/basket/";
+    }
+    function redirectToChangeImg() {
+        window.location.href = "http://127.0.0.1:8000/changeimg/";
+    }
+    function redirectToSingOut() {
+        window.location.href = "http://127.0.0.1:8000/";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownButton = document.querySelector(".relative button");
+        const dropdownMenu = document.querySelector(".relative .absolute");
+    });
+
+    dropdownButton.addEventListener("click", function () {
+        dropdownMenu.classList.toggle("hidden");
+    });
+</script>
