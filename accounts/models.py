@@ -2,7 +2,6 @@ from django.db import models
 from core.mixin import BaseModelUserMixin
 from django.urls import reverse
 
-
 class User(BaseModelUserMixin):
     """
         Model for users.
@@ -30,8 +29,7 @@ class User(BaseModelUserMixin):
             has_module_perms: Method to check if the user has permissions for a specific module.
             capitalize: Property method that returns the full name of the user with each word capitalized.
         """
-
-
+    pass
 
 
 class Profile(BaseModelUserMixin):
@@ -71,7 +69,7 @@ class Profile(BaseModelUserMixin):
             has_module_perms: Method to check if the user has permissions for a specific module.
         """
     image = models.ImageField(upload_to='images/profile/%Y/%m/%d/')
-    basket = models.OneToOneField(Basket, on_delete=models.CASCADE, related_name='profile')
+    basket = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='profile')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def get_absolute_url(self):
