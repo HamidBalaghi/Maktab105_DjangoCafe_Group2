@@ -38,3 +38,8 @@ class BaseModelUserMixin(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         """Method to check if the user has permissions for a specific module."""
         return True
+
+    @property
+    def capitalize(self):
+        """Property method that returns the full name of the user with each word capitalized."""
+        return self.full_name.title()
