@@ -11,7 +11,7 @@
                     onclick="redirectToLogin()"
                 />
             </div>
-            <!-- {% if user.is_authentication %} -->
+            {% comment %} <!-- {% if user.is_authentication %} --> {% endcomment %}
             <div class="relative">
                 <button class="flex items-center focus:outline-none">
                     <span class="mr-2 font-bold text-width">Username</span>
@@ -54,7 +54,7 @@
                     >
                 </div>
             </div>
-            <!--  {% endif %} -->
+            {% comment %} <!--  {% endif %} --> {% endcomment %}
         </div>
     </div>
     {% comment %}mobile view{% endcomment %}
@@ -169,7 +169,7 @@
                             onclick="redirectToLogin()"
                         />
                     </div>
-                    <!-- {% if user.is_authentication %} -->
+                    {% comment %} <!-- {% if user.is_authentication %} --> {% endcomment %}
                     <div class="relative">
                         <button class="flex items-center focus:outline-none">
                             <span class="mr-2 font-bold text-width"
@@ -214,7 +214,7 @@
                             >
                         </div>
                     </div>
-                    <!-- {% endif %} -->
+                    {% comment %} <!-- {% endif %} --> {% endcomment %}
                 </div>
             </a>
             <button class="navbar-close">
