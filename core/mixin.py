@@ -13,7 +13,6 @@ class BaseModelUserMixin(AbstractBaseUser, PermissionsMixin):
     """
     email = models.EmailField(max_length=200, unique=True)
     phone_number = models.CharField(max_length=11, unique=True)
-    full_name = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True, editable=False)
     update_time = models.DateTimeField(auto_now=True, editable=False)
     is_deleted = models.BooleanField(default=False)
@@ -22,7 +21,7 @@ class BaseModelUserMixin(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     USERNAME_FIELD = "phone_number"
-    REQUIRED_FIELDS = ['email', 'full_name']
+    REQUIRED_FIELDS = ['email']
     objects = UserManager()
 
     class Meta:
@@ -38,8 +37,3 @@ class BaseModelUserMixin(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         """Method to check if the user has permissions for a specific module."""
         return True
-
-    @property
-    def capitalize(self):
-        """Property method that returns the full name of the user with each word capitalized."""
-        return self.full_name.title()
