@@ -1,5 +1,5 @@
 from django.db import models
-from core.mixin import BaseModelUserMixin, DeleteManagerMixin
+from core.mixin import BaseModelUserMixin
 from django.urls import reverse
 
 
@@ -69,10 +69,9 @@ class Profile(models.Model):
     update_time = models.DateTimeField(auto_now=True, editable=False)
     is_deleted = models.BooleanField(default=False)
 
-    soft_delete_obj = DeleteManagerMixin()
 
     class Meta:
-        ordering = ['-update_time', '-is_active']
+        ordering = ['-update_time']
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
