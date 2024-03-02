@@ -30,14 +30,6 @@ class BaseModelUserMixin(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'user'
         verbose_name_plural = 'users'
 
-    def has_perm(self, perm, obj=None):
-        """Method to check if the user has a specific permission."""
-        return True
-
-    def has_module_perms(self, app_label):
-        """Method to check if the user has permissions for a specific module."""
-        return True
-
 
 class SoftDeleteMixin(models.QuerySet):
     def delete(self):
