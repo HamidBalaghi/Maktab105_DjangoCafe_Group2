@@ -3,7 +3,12 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    pass
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='category_images/')
+    sub_of = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
@@ -19,10 +24,3 @@ class Product(models.Model):
         return self.name
 
 
-class OrderProduct(models.Model):  # TODO: Creat app and move
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    count = models.IntegerField(default=1)
-
-    class Meta:
-        unique_together = ("order", "product")
