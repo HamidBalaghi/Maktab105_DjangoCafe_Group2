@@ -5,16 +5,16 @@
         <div class="flex items-center justify-between">
             <div>
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9EnNcsqmiSJkX_GqEQbyS1m5fwd3rOia6AQ&usqp=CAU"
-                    alt="Profile Image"
-                    class="w-16 h-16 rounded-full cursor-pointer"
+                    src="#"
+                    alt="Login"
+                    class="w-16 text-xl h-16 rounded-full cursor-pointer"
                     onclick="redirectToLogin()"
                 />
             </div>
 {#             {% if user.is_authentication %} #}
             <div class="relative">
                 <button class="flex items-center focus:outline-none">
-                    <span class="ms-2 text-gray-400">Username</span>
+                    <span class="ms-2 text-xl text-gray-400">Username</span>
                     <svg
                         class="w-4 h-4 fill-current"
                         xmlns="http://www.w3.org/2000/svg"
@@ -24,12 +24,12 @@
                 <div
                     class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10 hidden"
                 >
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    <a 
+                        href=""
+                        class="block px-4 py-2 text-xl text-gray-800 hover:bg-gray-200"
                         onclick="redirectToChangePassword()"
                         >Change Password</a
-                    >
+                    >{% comment %}
                     <a
                         href="#"
                         class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
@@ -41,10 +41,10 @@
                         class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                         onclick="redirectToBasket()"
                         >Basket</a
-                    >
+                    >{% endcomment %}
                     <a
-                        href="#"
-                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        href="{% url 'logout' %}"
+                        class="block px-4 py-2 text-xl text-gray-800 hover:bg-gray-200"
                         onclick="redirectToSingOut()"
                         >Sing out</a
                     >
@@ -133,6 +133,7 @@
     </ul>
     <div class="hidden lg:block">
         <form role="form" class="relative flex rounded-full mt-4">
+            {% csrf_token %}
             <input
                 type="text"
                 placeholder="enter your search here"
@@ -185,7 +186,7 @@
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                                 onclick="redirectToChangePassword()"
                                 >Change Password</a
-                            >
+                            >{% comment %}
                             <a
                                 href="#"
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
@@ -197,7 +198,7 @@
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                                 onclick="redirectToBasket()"
                                 >Basket</a
-                            >
+                            > {% endcomment %}
                             <a
                                 href="#"
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
@@ -211,22 +212,10 @@
                     {% endcomment %}
                 </div>
             </a>
-            <button class="navbar-close">
-                <svg
-                    class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    ></path>
-                </svg>
-            </button>
+             <button class="flex items-center focus:outline-none">
+                    <span class="mr-2 font-bold text-width ">Username</span>
+                    <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm10 2a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-2-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-10-8h12v2H8V2z"/></svg>
+                </button>
         </div>
 
         <div>
@@ -272,6 +261,7 @@
         <div class="mt-auto">
             <div class="">
                 <form role="form" class="relative flex rounded-full mt-4">
+                    {% csrf_token %}
                     <input
                         type="text"
                         placeholder="enter your search here"
@@ -292,6 +282,15 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            const dropdownButton = document.querySelector(".relative button");
+            const dropdownMenu = document.querySelector(".relative .absolute");
+
+            dropdownButton.addEventListener("click", function() {
+                dropdownMenu.classList.toggle("hidden");
+            });
+        });
+    
     document.addEventListener("DOMContentLoaded", function () {
         const burger = document.querySelectorAll(".navbar-burger");
         const menu = document.querySelectorAll(".navbar-menu");
@@ -330,20 +329,21 @@
         }
     });
     function redirectToLogin() {
-        window.location.href = "http://127.0.0.1:8000/login/";
-    }
-    function redirectToChangePassword() {
-        window.location.href = "http://127.0.0.1:8000/change_password/";
-    }
-    function redirectToBasket() {
-        window.location.href = "http://127.0.0.1:8000/basket/";
-    }
-    function redirectToChangeImg() {
-        window.location.href = "http://127.0.0.1:8000/changeimg/";
-    }
-    function redirectToSingOut() {
-        window.location.href = "http://127.0.0.1:8000/";
-    }
+            window.location.href = "{% url 'login' %}";
+        }
+        function redirectToChangePassword() {
+            window.location.href = "{% url 'edit_user' %}";
+        }
+     {% comment %} 
+        function redirectToBasket() {
+            window.location.href = "profile/cart.html";
+        }
+        function redirectToChangeImg() {
+            window.location.href = "{% url 'change_img' %}";
+        } {% endcomment %}
+        function redirectToSingOut() {
+            window.location.href = "{% url 'logout' %}";
+        } 
 
     document.addEventListener("DOMContentLoaded", function () {
         const dropdownButton = document.querySelector(".relative button");
