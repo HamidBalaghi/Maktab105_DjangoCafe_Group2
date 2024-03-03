@@ -4,8 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm
-from django.contrib.auth.views import LoginView
+from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm, ProfileForm
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
 
 
@@ -22,7 +22,7 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(LoginRequiredMixin, View):
-    success_url = reverse_lazy('p')
+    success_url = reverse_lazy('/')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -42,7 +42,7 @@ class EditeUserView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class(instance=request.user.profile, initial={'email': request.user.email})
-        return render(request, 'profile/change_password.html', {'form': form})
+        return render(request, 'profile/chage_profile.html', {'form': form})
 
     def post(self, request):
         form = self.form_class(request.POST, instance=request.user.profile)
@@ -59,7 +59,7 @@ class EditeUserView(LoginRequiredMixin, View):
 
 class CreateUserView(View):
     form_class = UserRegistrationForm
-    template_name = 'profile/register.html'
+    template_name = 'profile/create_user.html'
 
     def get(self, request):
         form = self.form_class()
@@ -73,14 +73,42 @@ class CreateUserView(View):
             password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password)
             messages.success(request, f'Account created for {username}', extra_tags='success')
-            return redirect('login')
+            return redirect('creat_profile')
         else:
             return render(request, self.template_name, {'form': form})
 
 
-class ChangePasswordView(LoginRequiredMixin, View):
+class CreateProfileView(View):
+    template_name = 'profile/create_profile.html'
+
+    def get(self, request):
+        form = ProfileForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('login')  # Redirect to a success page
+        return render(request, self.template_name, {'form': form})
+
+
+class ChangePasswordView(PasswordChangeView):
     form_class = UserCreationForm
-    template_name = 'change_password.html'
+    template_name = 'profile/chage_password.html'
+    success_url = reverse_lazy('/')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+
+class RegisterView(View):
+    form_class = UserRegistrationForm
+    template_name = 'registration/register.html'
 
     def get(self, request):
         form = self.form_class()
@@ -89,8 +117,9 @@ class ChangePasswordView(LoginRequiredMixin, View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Password changed successfully', extra_tags='success')
-            return redirect('profile_detail')
-        else:
-            return render(request, self.template_name, {'form': form})
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
+            User.objects.create_user(username=username, email=email, password=password)
+            return redirect('registration_success')  # Assuming you have a URL named 'registration_success'
+        return render(request, self.template_name, {'form': form})

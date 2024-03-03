@@ -9,7 +9,7 @@
     
 <div class=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
     <div class="p-4 m-4 max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md shadow-md rounded shadow-lg bg-opacity-20 shadow-lg backdrop-filter backdrop-blur-lg backdrop-contrast-100 border-black border-opacity-20 rounded-lg">
-        <form class="space-y-4" action="#" method="POST">
+        <form class="space-y-4" action="#" method="post">
             {% csrf_token %}
                 {{ form.as_p }}
 {#        <div class="text-center font-semibold text-gray-800 bg-gray-200 p-3">#}
@@ -31,11 +31,10 @@
 {#                </div>#}
                 <div class="flex items-center justify-between">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded focus:outline-none focus:shadow-outline">
-                        Change Password
+                        send edite
                     </button>
                 </div>
             </form>
         </div>
     </div>
-{#</div>#}
 {% endblock  %}
