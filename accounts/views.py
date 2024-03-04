@@ -143,5 +143,4 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'profile'
 
     def get_object(self, queryset=None):
-        profile_get_object = Profile.objects.get(user=self.request.user)
-        return get_object_or_404(User, pk=self.kwargs['pk']) and profile_get_object
+        return get_object_or_404(User, pk=self.kwargs['pk'])
