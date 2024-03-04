@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,django,flask,database,redis,jetbrains+all,ssh
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,django,flask,database,redis,jetbrains+all,ssh
 
+# Ignore Django Migrations
+**/migrations/
+
 ### Database ###
 *.accdb
 *.db
