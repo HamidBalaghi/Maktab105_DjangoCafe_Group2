@@ -2,10 +2,6 @@ from django.views.generic import ListView, View
 from django.shortcuts import render
 from .models import *
 
-
-# Create your views here.
-
-
 class CategoryView(ListView):
     model = Category
     template_name = 'menu/categories.html'
@@ -13,7 +9,6 @@ class CategoryView(ListView):
 
 
 class ProductView(View):
-
     def get(self, request, id):
         category = Category.objects.get(id=id)
         products = Category.objects.filter(category=category)
