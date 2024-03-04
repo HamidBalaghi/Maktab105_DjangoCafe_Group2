@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm, ProfileForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
@@ -145,3 +145,11 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         profile_get = Profile.objects.get(user=self.request.user)
         return get_object_or_404(User, pk=self.kwargs['pk'])
+
+
+class ContactUsView(TemplateView):
+    template_name = 'contact/contact_us.html'
+
+
+class AboutUsView(TemplateView):
+    template_name = 'about/about_coffe.html'
