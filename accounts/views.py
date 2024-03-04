@@ -4,9 +4,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import DetailView
+
 from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm, ProfileForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
+
+from .models import Profile
 
 
 class HomeView(View):
@@ -131,3 +135,9 @@ class RegisterView(View):
             User.objects.create_user(username=username, email=email, password=password)
             return redirect('registration_success')  # Assuming you have a URL named 'registration_success'
         return render(request, self.template_name, {'form': form})
+
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = 'profile/profile_detail.html'  # Path to your template file
+    context_object_name = 'profile'
