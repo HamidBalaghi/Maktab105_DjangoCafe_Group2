@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView
@@ -23,6 +23,8 @@ class HomeView(View):
 class UserLoginView(LoginView):
     template_name = 'profile/login.html'
     redirect_authenticated_user = True
+    success_url = reverse_lazy('home')
+    next_page = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -62,7 +64,7 @@ class EditeUserView(LoginRequiredMixin, View):
             request.user.email = form.cleaned_data.get('email')
             request.user.save()
             messages.success(request, 'Your profile has been updated successfully', extra_tags='success')
-            return redirect('home' )
+            return redirect('home')
         else:
             messages.error(request, 'Your profile has not been updated successfully', extra_tags='error')
             return redirect('edit_user')
@@ -133,11 +135,14 @@ class RegisterView(View):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password)
-            return redirect('registration_success')  # Assuming you have a URL named 'registration_success'
+            return redirect('registration_success')
         return render(request, self.template_name, {'form': form})
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
-    template_name = 'profile/profile_detail.html'  # Path to your template file
+    template_name = 'profile/profile_detail.html'
     context_object_name = 'profile'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, pk=self.kwargs['pk'])

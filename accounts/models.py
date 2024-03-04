@@ -2,37 +2,49 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+"""
+  +-------------+     1    +---------------------+
+  |    User     |◄ ─ ─ ─ ─ ┤     Profile         |
+  +-------------+          +---------------------+
+  | id          |◄─────────┤ user_id (PK, FK)    |
+  | username    |          | phone_number        |
+  | password    |          | full_name           |
+  | email       |          | create_time         |
+  | ...         |          | update_time         |
+  +-------------+          +---------------------+
+
+"""
+
 
 class Profile(models.Model):
     """
-        Model for user profiles.
+    Model representing additional information associated with a user.
 
-        This class represents a user profile model, containing additional information about the user
-        It inherits common user-related fields and methods from models.Model.
+    user: One-to-one relationship with the User model.
+    If a User object is deleted, the associated Profile object will also be deleted.
+    'related_name' attribute allows accessing Profile objects from a User instance using 'user.profile'.
 
-        Attributes:
-            image (ImageField): Field to store the user's profile image.
-            user (OneToOneField): Relationship to the user model using a OneToOneField.
-            email (EmailField): The email address of the user.
-            phone_number (CharField): The phone number of the user.
-            full_name (CharField): The full name of the user.
-            create_time (DateTimeField): The timestamp indicating the creation time of the user record.
-            update_time (DateTimeField): The timestamp indicating the last update time of the user record.
-            is_deleted (BooleanField): Flag indicating whether the user has been deleted or not.
+    phone number: Field to store the user's phone number.
+    'unique=True' ensures each phone number is unique.
 
-        Meta:
-            ordering (list): Specifies the default ordering of profile records, in this case, by username.
-            verbose_name (str): Singular name for the model used in the admin interface.
-            verbose_name_plural (str): Plural name for the model used in the admin interface.
+    full name: Field to store the user's full name
 
-        Methods:
-            get_absolute_url: Method to return the absolute URL of the profile instance.
-        """
+    create time: Field to store the creation time of the profile.
+    'auto_now_add=True' automatically sets the field to the current datetime when the object is first created.
+    'editable=False' prevents this field from being edited.
 
+   update time: Field to store the last update time of the profile.
+   'auto_now=True' automatically updates the field to the current datetime whenever the object is saved.
+   'editable=False' prevents this field from being edited.
+   """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+
     phone_number = models.CharField(max_length=11, unique=True)
+
     full_name = models.CharField(max_length=100)
+
     create_time = models.DateTimeField(auto_now_add=True, editable=False)
+
     update_time = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
@@ -41,6 +53,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Profiles'
 
     def __str__(self):
+        """Method to return a string representation of the Profile object."""
         return f"ID: {self.id} full name: {self.full_name}"
 
     def get_absolute_url(self):
