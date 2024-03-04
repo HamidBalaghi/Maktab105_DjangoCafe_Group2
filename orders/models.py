@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
@@ -23,9 +24,13 @@ class OrderItem(models.Model):
         return self.quantity * self.product.price
 
 
-class PaidOrderManager(models.manager):
+class PaidOrderManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_paid=True)
+        user_model = get_user_model()
+        if user_model.is_authenticated:
+            return super().get_queryset().filter(is_paid=True)
+        else:
+            return super().get_queryset().none()
 
 
 class Order(models.Model):
@@ -33,6 +38,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
     paid_time = models.DateTimeField(null=True, blank=True, auto_now=True)
+    paid_object = PaidOrderManager()
 
     @property
     def total_price(self):
