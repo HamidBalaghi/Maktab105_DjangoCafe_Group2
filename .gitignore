@@ -4,6 +4,8 @@
 # Ignore Django Migrations
 **/migrations/
 
+# Ignore my shell for testing
+scripts
 ### Database ###
 *.accdb
 *.db
