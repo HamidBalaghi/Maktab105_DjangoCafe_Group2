@@ -13,12 +13,23 @@ class OrderItem(models.Model):
     # class Meta:
     #     unique_together = ("order", "menu")
 
+    @property
+    def total_price_item(self):
+        return self.quantity * self.product.price
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
     paid_time = models.DateTimeField(null=True, blank=True, auto_now=True)
+
+    @property
+    def total_price(self):
+        total = 0
+        for item in self.order_items.all():
+            total += item.total_price_item
+        return total
 
     def __str__(self):
         return f"ID: {self.id} | User: {self.user}"
@@ -30,4 +41,3 @@ class ReserveTable(models.Model):
     is_reserved = models.BooleanField(default=False)
     reserved_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     repay_time = models.DateTimeField(null=True, blank=True, auto_now=True)
-
