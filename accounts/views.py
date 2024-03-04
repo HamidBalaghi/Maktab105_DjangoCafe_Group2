@@ -9,6 +9,13 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
 
 
+class HomeView(View):
+    template_name = 'base/base.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
 class UserLoginView(LoginView):
     template_name = 'profile/login.html'
     redirect_authenticated_user = True
@@ -16,25 +23,25 @@ class UserLoginView(LoginView):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             messages.success(request, 'You have already login successfully', extra_tags='success')
-            return redirect('/')
+            return redirect('home')
         else:
             return super().dispatch(request, *args, **kwargs)
 
 
 class UserLogoutView(LoginRequiredMixin, View):
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.success(request, 'You have already logged out successfully', extra_tags='success')
-            return redirect('/')
+            return redirect('home')
         else:
             return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         logout(self.request)
         messages.success(request, 'Logout successfully', extra_tags='success')
-        return redirect('/') or redirect('home')
+        return redirect('home')
 
 
 class EditeUserView(LoginRequiredMixin, View):
@@ -51,7 +58,7 @@ class EditeUserView(LoginRequiredMixin, View):
             request.user.email = form.cleaned_data.get('email')
             request.user.save()
             messages.success(request, 'Your profile has been updated successfully', extra_tags='success')
-            return redirect('login', )
+            return redirect('home' )
         else:
             messages.error(request, 'Your profile has not been updated successfully', extra_tags='error')
             return redirect('edit_user')
@@ -72,8 +79,9 @@ class CreateUserView(View):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password)
+
             messages.success(request, f'Account created for {username}', extra_tags='success')
-            return redirect('creat_profile')
+            return redirect('login')
         else:
             return render(request, self.template_name, {'form': form})
 
@@ -91,14 +99,14 @@ class CreateProfileView(View):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('login')  # Redirect to a success page
+            return redirect('home')  # Redirect to a success page
         return render(request, self.template_name, {'form': form})
 
 
 class ChangePasswordView(PasswordChangeView):
     form_class = UserCreationForm
     template_name = 'profile/chage_password.html'
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('home')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
