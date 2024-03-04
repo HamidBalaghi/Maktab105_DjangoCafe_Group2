@@ -11,7 +11,7 @@
                         onclick="redirectToLogin()"
                 />
             </div>
-            {% if request.user.is_authenticated %}
+            {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
                 <div class="relative">
                 <button class="flex items-center focus:outline-none">
                     <span class="ms-2 text-xl text-gray-400">Username</span>
@@ -21,7 +21,7 @@
                             viewBox="0 0 20 20"
                     ></svg>
                 </button>
-            {% endif %}
+            {% comment %} {% endif %} {% endcomment %}
             <div
                     class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10 hidden"
             >
