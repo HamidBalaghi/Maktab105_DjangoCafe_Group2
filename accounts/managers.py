@@ -4,9 +4,9 @@ from django.contrib.auth.models import BaseUserManager
 class UserManager(BaseUserManager):
     def create_user(self, phone_number, email, password):
         if not phone_number:
-            raise ValueError('The phone number must be set')
+            raise ValueError("The phone number must be set")
         elif not email:
-            raise ValueError('The Email must be set')
+            raise ValueError("The Email must be set")
         user = self.model(phone_number=phone_number, email=self.normalize_email(email))
         user.is_admin = False
         user.is_staff = False
@@ -32,4 +32,3 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
-
