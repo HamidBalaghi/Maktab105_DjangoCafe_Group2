@@ -9,6 +9,8 @@ from .views import (
     CreateProfileView,
     HomeView,
     ProfileDetailView,
+    ContactUsView,
+    AboutUsView,
 )
 
 """ 
@@ -21,6 +23,8 @@ URL pattern for editing a user
 URL pattern for user registration
 URL pattern for changing password 
 URL pattern for Info profile 
+URL pattern for ContactUS 
+URL pattern for AboutUs
 """
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
@@ -32,4 +36,6 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("changepass/", ChangePasswordView.as_view(), name="change_pass"),
     path("profiles/<int:pk>/", ProfileDetailView.as_view(), name="profile_detail"),
+    path("contactus/", ContactUsView.as_view(), name="contactus"),
+    path("aboutus/", AboutUsView.as_view(), name="aboutus"),
 ]
