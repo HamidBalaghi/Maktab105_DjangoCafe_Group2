@@ -166,3 +166,6 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
 class ContactUsView(TemplateView):
     template_name = "contact/contact_us.html"
+
+class AboutUsView(TemplateView):
+    template_name = "about/about_coffe.html"
