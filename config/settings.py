@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # creat app
     'accounts.apps.AccountsConfig',
     'core.apps.CoreConfig',
-    'product.apps.ProductConfig',
+    'menu.apps.ProductConfig',
     "orders.apps.OrdersConfig",
 ]
 

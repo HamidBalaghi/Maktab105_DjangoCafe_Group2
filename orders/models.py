@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from product.models import Product, Table
+from menu.models import Product, Table
 
 
 # Create your models here.
@@ -10,8 +10,8 @@ class OrderItem(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items')
     quantity = models.PositiveIntegerField(default=1)
 
-    class Meta:
-        unique_together = ("order", "product")
+    # class Meta:
+    #     unique_together = ("order", "menu")
 
 
 class Order(models.Model):
