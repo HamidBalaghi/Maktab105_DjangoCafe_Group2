@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% for order in object_list %}
+        <p><a href="{% url 'detail' pk=order.pk %}">{{ order }}</a></p>
+        
+    {% endfor %}
+
+    <p>{{ request.user.username }}</p>
+</body>
+</html>
