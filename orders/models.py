@@ -5,9 +5,14 @@ from menu.models import Product, Table
 
 # Create your models here.
 
+
 class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items')
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="order_items"
+    )
+    order = models.ForeignKey(
+        "Order", on_delete=models.CASCADE, related_name="order_items"
+    )
     quantity = models.PositiveIntegerField(default=1)
 
     # class Meta:
@@ -16,6 +21,11 @@ class OrderItem(models.Model):
     @property
     def total_price_item(self):
         return self.quantity * self.product.price
+
+
+class PaidOrderManager(models.manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_paid=True)
 
 
 class Order(models.Model):
