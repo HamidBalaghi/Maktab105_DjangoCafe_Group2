@@ -19,7 +19,7 @@ class Product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='category_images/')
+    image = models.ImageField(upload_to='category_images/', null=True, blank=True)
     sub_of = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
