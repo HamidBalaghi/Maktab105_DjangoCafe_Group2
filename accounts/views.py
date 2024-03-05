@@ -156,17 +156,18 @@ class CreateProfileView(View):
     template_name = 'profile/create_profile.html'
 
     def get(self, request):
+        print(f"profile get creat {request.user}")
         """
         Renders the form for creating a user profile.
         """
-        form = ProfileForm()
+        form = ProfileForm(instance=request.user.profile)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         """
         Processes the form submission for creating a user profile.
         """
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
