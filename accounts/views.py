@@ -4,14 +4,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic import DetailView, TemplateView
 from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm, ProfileForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
 from .models import Profile
 
 
-class HomeView(ListView):
+class HomeView(View):
     template_name = "home/home.html"
 
     def get(self, request):
