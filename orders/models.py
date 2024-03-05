@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
-from django.contrib.auth import get_user_model
-
+from managers import PaidOrderManager
 
 # Create your models here.
 
@@ -22,15 +21,6 @@ class OrderItem(models.Model):
     @property
     def total_price_item(self):
         return self.quantity * self.product.price
-
-
-class PaidOrderManager(models.Manager):
-    def get_queryset(self):
-        user_model = get_user_model()
-        if user_model.is_authenticated:
-            return super().get_queryset().filter(is_paid=True)
-        else:
-            return super().get_queryset().none()
 
 
 class Order(models.Model):
