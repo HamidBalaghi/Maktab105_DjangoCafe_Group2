@@ -1,5 +1,10 @@
 from django.db import models
+<<<<<<< HEAD
 from .managers import ActiveProductManager
+=======
+from managers import ActiveProductManager # wrong import TODO: .managers or menu.manager and first check code after push code
+
+>>>>>>> f64f943d4cfa4127b9e1d8523902f0b23e5c7150
 
 
 class Product(models.Model):
