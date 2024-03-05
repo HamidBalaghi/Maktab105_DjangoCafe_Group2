@@ -19,7 +19,7 @@ class HomeView(View):
     """
     Displays the home page.
     """
-    template_name = "home/home.html"
+    template_name = 'home/home.html'
 
     def get(self, request):
         return render(request, self.template_name)
@@ -29,9 +29,9 @@ class UserLoginView(LoginView):
     """
     Handles user login.
     """
-    template_name = "profile/login.html"
+    template_name = 'profile/login.html'
     redirect_authenticated_user = True
-    next_page = reverse_lazy("home")
+    next_page = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         """
@@ -39,9 +39,9 @@ class UserLoginView(LoginView):
         """
         if request.user.is_authenticated:
             messages.success(
-                request, "You have already login successfully", extra_tags="success"
+                request, 'You have already login successfully', extra_tags='success'
             )
-            return redirect("home")
+            return redirect('home')
         else:
             return super().dispatch(request, *args, **kwargs)
 
@@ -50,7 +50,7 @@ class UserLogoutView(LoginRequiredMixin, View):
     """
     Handles user logout.
     """
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         """
@@ -59,10 +59,10 @@ class UserLogoutView(LoginRequiredMixin, View):
         if not request.user.is_authenticated:
             messages.success(
                 request,
-                "You have already logged out successfully",
-                extra_tags="success",
+                'You have already logged out successfully',
+                extra_tags='success',
             )
-            return redirect("home")
+            return redirect('home')
         else:
             return super().dispatch(request, *args, **kwargs)
 
@@ -71,8 +71,8 @@ class UserLogoutView(LoginRequiredMixin, View):
         Logs out the user and redirects to the home page with a success message.
         """
         logout(self.request)
-        messages.success(request, "Logout successfully", extra_tags="success")
-        return redirect("home")
+        messages.success(request, 'Logout successfully', extra_tags='success')
+        return redirect('home')
 
 
 class EditeUserView(LoginRequiredMixin, View):
@@ -86,9 +86,9 @@ class EditeUserView(LoginRequiredMixin, View):
         Renders the form for editing the user profile.
         """
         form = self.form_class(
-            instance=request.user.profile, initial={"email": request.user.email}
+            instance=request.user.profile, initial={'email': request.user.email}
         )
-        return render(request, "profile/chage_profile.html", {"form": form})
+        return render(request, 'profile/chage_profile.html', {'form': form})
 
     def post(self, request):
         """
@@ -97,27 +97,24 @@ class EditeUserView(LoginRequiredMixin, View):
         form = self.form_class(request.POST, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            request.user.email = form.cleaned_data.get("email")
+            request.user.email = form.cleaned_data.get('email')
             request.user.save()
             messages.success(
                 request,
-                "Your profile has been updated successfully",
-                extra_tags="success",
+                'Your profile has been updated successfully',
+                extra_tags='success',
             )
-            return redirect("home")
+            return redirect('home')
         else:
             messages.error(
                 request,
-                "Your profile has not been updated successfully",
-                extra_tags="error",
+                'Your profile has not been updated successfully',
+                extra_tags='error',
             )
-            return redirect("edit_user")
-import logging
+            return redirect('edit_user')
 
-logger = logging.getLogger(__name__)
 
 class CreateUserView(View):
-
     """
     Handles user registration.
     """
@@ -132,8 +129,6 @@ class CreateUserView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        logger.debug(f"Received POST request to create profile for user {request.user}")
-
         """
         Processes the form submission for user registration.
         """
@@ -153,6 +148,7 @@ class CreateUserView(View):
         else:
             return render(request, self.template_name, {'form': form})
 
+
 class CreateProfileView(View):
     """
     Handles user profile creation.
@@ -167,8 +163,6 @@ class CreateProfileView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        print(f"Received POST request to create profile for user {request.user}")
-
         """
         Processes the form submission for creating a user profile.
         """
