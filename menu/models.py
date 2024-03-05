@@ -1,5 +1,5 @@
 from django.db import models
-from managers import ActiveProductManager
+from .managers import ActiveProductManager
 
 
 class Product(models.Model):

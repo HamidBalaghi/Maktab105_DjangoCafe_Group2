@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
-from managers import PaidOrderManager
+from .managers import PaidOrderManager
 
 # Create your models here.
 
@@ -29,6 +29,7 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     paid_time = models.DateTimeField(null=True, blank=True, auto_now=True)
     paid_object = PaidOrderManager()
+    objects = models.Manager()
 
     @property
     def total_price(self):
