@@ -1,6 +1,7 @@
-from django.views.generic import ListView, View
-from django.shortcuts import render
+from django.views.generic import ListView, View,DetailView
+from django.shortcuts import render ,HttpResponse,redirect
 from .models import *
+from orders.models import *
 
 class CategoryView(ListView):
     model = Category
@@ -11,5 +12,26 @@ class CategoryView(ListView):
 class ProductView(View):
     def get(self, request, id):
         category = Category.objects.get(id=id)
-        products = Category.objects.filter(category=category)
-        return render(request, 'products.html', {'products_list': products})
+        products = Product.objects.filter(categories=category)
+
+        return render(request, 'menu/products.html', {'products_list': products})
+
+
+class TransactionView(View):
+
+    def get(self,request,id):
+
+        get_product=Product.objects.get(id=id)
+        get_user = User.objects.get(username=request.user)
+        get_order = Order.objects.get(user=get_user)
+
+        if not OrderItem.objects.filter(product=get_product, order=get_order).exists():
+            create_object=OrderItem.objects.create(product=get_product,order=get_order,)
+            create_object.save()
+            return HttpResponse('add to cart')
+        else:
+            return HttpResponse('already exists')
+
+
+
+
