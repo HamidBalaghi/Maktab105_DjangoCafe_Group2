@@ -19,7 +19,6 @@ class HomeView(View):
     """
     Displays the home page.
     """
-
     template_name = "home/home.html"
 
     def get(self, request):
@@ -30,10 +29,8 @@ class UserLoginView(LoginView):
     """
     Handles user login.
     """
-
     template_name = "profile/login.html"
     redirect_authenticated_user = True
-    success_url = reverse_lazy("home")
     next_page = reverse_lazy("home")
 
     def dispatch(self, request, *args, **kwargs):
@@ -53,7 +50,6 @@ class UserLogoutView(LoginRequiredMixin, View):
     """
     Handles user logout.
     """
-
     success_url = reverse_lazy("home")
 
     def dispatch(self, request, *args, **kwargs):
@@ -83,7 +79,6 @@ class EditeUserView(LoginRequiredMixin, View):
     """
     Handles user profile editing.
     """
-
     form_class = EditProfileForm
 
     def get(self, request):
@@ -117,57 +112,63 @@ class EditeUserView(LoginRequiredMixin, View):
                 extra_tags="error",
             )
             return redirect("edit_user")
+import logging
 
+logger = logging.getLogger(__name__)
 
 class CreateUserView(View):
+
     """
     Handles user registration.
     """
-
     form_class = UserRegistrationForm
-    template_name = "profile/create_user.html"
+    template_name = 'profile/create_user.html'
 
     def get(self, request):
         """
         Renders the registration form.
         """
         form = self.form_class()
-        return render(request, self.template_name, {"form": form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        logger.debug(f"Received POST request to create profile for user {request.user}")
+
         """
         Processes the form submission for user registration.
         """
         form = self.form_class(request.POST)
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            email = form.cleaned_data["email"]
-            password = form.cleaned_data["password1"]
-            User.objects.create_user(username=username, email=email, password=password)
-
+            username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
+            User.objects.create_user(username=username, email=email, password=password, first_name=first_name,
+                                     last_name=last_name)
             messages.success(
-                request, f"Account created for {username}", extra_tags="success"
+                request, f'Account created for {username}', extra_tags='success'
             )
-            return redirect("login")
+            return redirect('login')
         else:
-            return render(request, self.template_name, {"form": form})
-
+            return render(request, self.template_name, {'form': form})
 
 class CreateProfileView(View):
     """
     Handles user profile creation.
     """
-
-    template_name = "profile/create_profile.html"
+    template_name = 'profile/create_profile.html'
 
     def get(self, request):
         """
         Renders the form for creating a user profile.
         """
         form = ProfileForm()
-        return render(request, self.template_name, {"form": form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        print(f"Received POST request to create profile for user {request.user}")
+
         """
         Processes the form submission for creating a user profile.
         """
@@ -176,17 +177,16 @@ class CreateProfileView(View):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect("home")  # Redirect to a success page
-        return render(request, self.template_name, {"form": form})
+            return redirect('home')
+        return render(request, self.template_name, {'form': form})
 
 
 class ChangePasswordView(PasswordChangeView):
     """
     Handles changing user password.
     """
-
     form_class = UserCreationForm
-    template_name = "profile/chage_password.html"
+    template_name = 'profile/chage_password.html'
     success_url = reverse_lazy("home")
 
     def get_form_kwargs(self):
@@ -194,7 +194,7 @@ class ChangePasswordView(PasswordChangeView):
         Adds the current user to the form's keyword arguments.
         """
         kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
+        kwargs['user'] = self.request.user
         return kwargs
 
 
@@ -202,16 +202,15 @@ class RegisterView(View):
     """
     Handles user registration.
     """
-
     form_class = UserRegistrationForm
-    template_name = "registration/register.html"
+    template_name = 'registration/register.html'
 
     def get(self, request):
         """
         Renders the registration form.
         """
         form = self.form_class()
-        return render(request, self.template_name, {"form": form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         """
@@ -219,41 +218,39 @@ class RegisterView(View):
         """
         form = self.form_class(request.POST)
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            email = form.cleaned_data["email"]
-            password = form.cleaned_data["password1"]
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password)
-            return redirect("registration_success")
-        return render(request, self.template_name, {"form": form})
+            return redirect('registration_success')
+        return render(request, self.template_name, {'form': form})
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     """
     Displays user profile details.
     """
-
     model = Profile
-    template_name = "profile/profile_detail.html"
-    context_object_name = "profile"
+    template_name = 'profile/profile_detail.html'
+    context_object_name = 'profile'
 
     def get_object(self, queryset=None):
         """
         Retrieves the profile object for the currently logged-in user.
         """
         profile_get_object = Profile.objects.get(user=self.request.user)
-        return get_object_or_404(User, pk=self.kwargs["pk"]) and profile_get_object
+        return get_object_or_404(User, pk=self.kwargs['pk']) and profile_get_object
 
 
 # class ContactUsView(TemplateView):
 #     """
 #     Displays the contact us page.
 #     """
-#     template_name = "contact/contact_us.html"
+#     template_name = 'contact/contact_us.html'
 
 
 class AboutUsView(TemplateView):
     """
     Displays the about us page.
     """
-
-    template_name = "about/about_coffe.html"
+    template_name = 'about/about_coffe.html'

@@ -14,7 +14,7 @@
             {% if request.user.is_authenticated %}
                 <div class="relative">
                 <button class="flex items-center focus:outline-none">
-                    <span class="ms-2 text-xl text-gray-400"> {{user.username}} </span>
+                    <span class="ms-2 text-xl text-gray-400">{{ user.username }}</span>
                     <svg
                             class="w-4 h-4 fill-current"
                             xmlns="http://www.w3.org/2000/svg"
@@ -25,17 +25,31 @@
             <div
                     class="absolute left-5 mt-2 w-48 bg-gray-900 px-4 py-4 bg-opacity-20 shadow-lg backdrop-filter backdrop-blur-lg backdrop-contrast-100 border-black border-opacity-20 rounded-lg  z-10 hidden"
             >
-                <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                        onclick="redirectToInfo({{ user.pk }})" >Info Account</a
-                >
-                <a
-                        href="#"
-                        class="block px-4 py-2  text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                        onclick="redirectToChangeProfile()"
-                >Edite Profile</a
-                >
+
+
+                {% if not request.user.profile.full_name %}
+                    <a
+                            href="#"
+                            class="block px-4 py-2  text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                            onclick="redirectToCreateProfile()"
+                    >Create Profile</a
+                    >
+                {% endif %}
+                {% if  request.user.profile.full_name %}
+
+                    <a
+                            href="#"
+                            class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                            onclick="redirectToInfo({{ user.pk }})">Info Account</a
+                    >
+
+                    <a
+                            href="#"
+                            class="block px-4 py-2  text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                            onclick="redirectToChangeProfile()"
+                    >Edite Profile</a
+                    >
+                {% endif %}
                 <a
                         href="{% url 'change_pass' %}"
                         class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
@@ -170,7 +184,7 @@
 
                     <div class="relative">
                         <button class="flex items-center focus:outline-none">
-                            <span class="ms-2 text-gray-400">{{user.username}}</span>
+                            <span class="ms-2 text-gray-400">{{ user.username }}</span>
                             <svg
                                     class="w-4 h-4 fill-current gray-400"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -178,34 +192,48 @@
                             ></svg>
                         </button>
                     </div>
-                        <div class="absolute left-5 mt-2 w-48 bg-gray-900 px-4 py-4 bg-opacity-20 shadow-lg backdrop-filter backdrop-blur-lg backdrop-contrast-100 border-black border-opacity-20 rounded-lg  z-10 hidden">
-                            <a
-                                    href="#"
-                                    class="block px-4 py-2 text-xl text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                                    onclick="redirectToInfo({{ user.pk }})" >
-                            <a
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                                    onclick="redirectToChangeProfile()"
-                            >Edite Profile</a
-                            >
-                            <a
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                                    onclick="redirectToChangePassword()"
-                            >Change Password</a
-                            >
+                    <div class="absolute left-5 mt-2 w-48 bg-gray-900 px-4 py-4 bg-opacity-20 shadow-lg backdrop-filter backdrop-blur-lg backdrop-contrast-100 border-black border-opacity-20 rounded-lg  z-10 hidden">
+                        {% if not request.user.profile.full_name %}
+                    <a
+                            href="#"
+                            class="block px-4 py-2  text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                            onclick="redirectToCreateProfile()"
+                    >Create Profile</a
+                    >
+                {% endif %}
+                {% if  request.user.profile.full_name %}
 
                             <a
                                     href="#"
                                     class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
-                                    onclick="redirectToSingOut()"
-                            >Sing out</a
+                                    onclick="redirectToInfo({{ user.pk }})">Info Account</a
                             >
-                        </div>
-                </div>   
+
+                            <a
+                                    href="#"
+                                    class="block px-4 py-2  text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                                    onclick="redirectToChangeProfile()"
+                            >Edite Profile</a
+                            >
+                        {% endif %}
+                        <a
+                                href="{% url 'change_pass' %}"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                                onclick="redirectToChangePassword()"
+                        >Change Password</a
+                        >
+
+                        <a
+                                href="{% url 'logout' %}"
+                                class="block px-4 py-2 text-sm text-gray-400 hover:bg-gray-200 hover:rounded-md"
+                                onclick="redirectToSingOut()"
+                        >Sing out</a
+                        >
+                    </div>
+
+                </div>
             </a>
-          
+
         </div>
 
         <div class="h-full">
@@ -332,11 +360,14 @@
     }
 
     function redirectToInfo(id) {
-    console.log("Redirecting to profile with pk:", id);
+        console.log("Redirecting to profile with pk:", id);
         window.location.href = `/profiles/${id}/`;
-}
+    }
+    function redirectToCreateProfile() {
+        window.location.href = "{% url 'creat_profile' %}";
+    }
 
-
+redirectToCreateProfile
     function redirectToSingOut() {
         window.location.href = "{% url 'logout' %}";
     }
