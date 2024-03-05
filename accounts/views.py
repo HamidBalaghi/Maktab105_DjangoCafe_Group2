@@ -19,6 +19,7 @@ class HomeView(View):
     """
     Displays the home page.
     """
+
     template_name = "home/home.html"
 
     def get(self, request):
@@ -29,6 +30,7 @@ class UserLoginView(LoginView):
     """
     Handles user login.
     """
+
     template_name = "profile/login.html"
     redirect_authenticated_user = True
     success_url = reverse_lazy("home")
@@ -51,6 +53,7 @@ class UserLogoutView(LoginRequiredMixin, View):
     """
     Handles user logout.
     """
+
     success_url = reverse_lazy("home")
 
     def dispatch(self, request, *args, **kwargs):
@@ -80,6 +83,7 @@ class EditeUserView(LoginRequiredMixin, View):
     """
     Handles user profile editing.
     """
+
     form_class = EditProfileForm
 
     def get(self, request):
@@ -119,6 +123,7 @@ class CreateUserView(View):
     """
     Handles user registration.
     """
+
     form_class = UserRegistrationForm
     template_name = "profile/create_user.html"
 
@@ -152,6 +157,7 @@ class CreateProfileView(View):
     """
     Handles user profile creation.
     """
+
     template_name = "profile/create_profile.html"
 
     def get(self, request):
@@ -178,6 +184,7 @@ class ChangePasswordView(PasswordChangeView):
     """
     Handles changing user password.
     """
+
     form_class = UserCreationForm
     template_name = "profile/chage_password.html"
     success_url = reverse_lazy("home")
@@ -195,6 +202,7 @@ class RegisterView(View):
     """
     Handles user registration.
     """
+
     form_class = UserRegistrationForm
     template_name = "registration/register.html"
 
@@ -223,6 +231,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     """
     Displays user profile details.
     """
+
     model = Profile
     template_name = "profile/profile_detail.html"
     context_object_name = "profile"
@@ -235,15 +244,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         return get_object_or_404(User, pk=self.kwargs["pk"]) and profile_get_object
 
 
-class ContactUsView(TemplateView):
-    """
-    Displays the contact us page.
-    """
-    template_name = "contact/contact_us.html"
+# class ContactUsView(TemplateView):
+#     """
+#     Displays the contact us page.
+#     """
+#     template_name = "contact/contact_us.html"
 
 
 class AboutUsView(TemplateView):
     """
     Displays the about us page.
     """
+
     template_name = "about/about_coffe.html"

@@ -9,7 +9,7 @@ from .views import (
     CreateProfileView,
     HomeView,
     ProfileDetailView,
-    ContactUsView,
+    # ContactUsView,
     AboutUsView,
 )
 
@@ -36,6 +36,6 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("changepass/", ChangePasswordView.as_view(), name="change_pass"),
     path("profiles/<int:pk>/", ProfileDetailView.as_view(), name="profile_detail"),
-    path("contactus/", ContactUsView.as_view(), name="contactus"),
+    # path("contactus/", ContactUsView.as_view(), name="contactus"),
     path("aboutus/", AboutUsView.as_view(), name="aboutus"),
 ]
