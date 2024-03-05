@@ -1,12 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
-<<<<<<< HEAD
-from .managers import PaidOrderManager
-=======
-from .managers import PaidOrderManager # wrong import TODO: .managers or orders.manager and first check code after push code
 
->>>>>>> f64f943d4cfa4127b9e1d8523902f0b23e5c7150
+from .managers import PaidOrderManager
+
 
 # Create your models here.
 
