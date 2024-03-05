@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
-from managers import PaidOrderManager
+from .managers import PaidOrderManager
 
 # Create your models here.
 
