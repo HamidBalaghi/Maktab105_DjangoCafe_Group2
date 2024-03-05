@@ -16,8 +16,8 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
 
-    # class Meta:
-    #     unique_together = ("order", "menu")
+    class Meta:
+        unique_together = ("order", "product")
 
     @property
     def total_price_item(self):
