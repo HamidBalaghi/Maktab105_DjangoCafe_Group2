@@ -58,16 +58,6 @@ class UserRegistrationForm(forms.Form):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username is already taken.")
-        elif not username.isalnum():
-            raise forms.ValidationError("Username must be alphanumeric.")
-        elif not username.isalpha():
-            raise forms.ValidationError("Username must contain only letters.")
-        elif not username.islower():
-            raise forms.ValidationError("Username must be lowercase.")
-        elif not username.isupper():
-            raise forms.ValidationError("Username must be uppercase.")
-        elif ' ' in username:
-            raise forms.ValidationError("Username cannot contain spaces.")
         elif len(username) < 5:
             raise forms.ValidationError("Username must be at least 5 characters long.")
         elif len(username) > 50:
@@ -81,9 +71,7 @@ class UserRegistrationForm(forms.Form):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email address is already registered.")
-        elif not email.endswith('@gmail.com'):
-            raise forms.ValidationError("Please use a gmail address.")
-        elif not email.endswith('@yahoo.com'):
+        elif not email.endswith('@gmail.com') or email.endswith('@yahoo.com'):
             raise forms.ValidationError("Please use a gmail address.")
         elif '@' not in email:
             raise forms.ValidationError("Please enter a valid email address.")
