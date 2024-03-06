@@ -58,6 +58,20 @@ class UserRegistrationForm(forms.Form):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username is already taken.")
+        elif not username.isalnum():
+            raise forms.ValidationError("Username must be alphanumeric.")
+        elif not username.isalpha():
+            raise forms.ValidationError("Username must contain only letters.")
+        elif not username.islower():
+            raise forms.ValidationError("Username must be lowercase.")
+        elif not username.isupper():
+            raise forms.ValidationError("Username must be uppercase.")
+        elif ' ' in username:
+            raise forms.ValidationError("Username cannot contain spaces.")
+        elif len(username) < 5:
+            raise forms.ValidationError("Username must be at least 5 characters long.")
+        elif len(username) > 50:
+            raise forms.ValidationError("Username cannot be longer than 150 characters.")
         return username
 
     def clean_email(self):
