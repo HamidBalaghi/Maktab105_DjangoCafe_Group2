@@ -67,6 +67,20 @@ class UserRegistrationForm(forms.Form):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email address is already registered.")
+        elif not email.endswith('@gmail.com'):
+            raise forms.ValidationError("Please use a gmail address.")
+        elif not email.endswith('@yahoo.com'):
+            raise forms.ValidationError("Please use a gmail address.")
+        elif '@' not in email:
+            raise forms.ValidationError("Please enter a valid email address.")
+        elif ' ' in email:
+            raise forms.ValidationError("Email address cannot contain spaces.")
+        elif len(email) < 1:
+            raise forms.ValidationError("Email address must be at least 1 characters long.")
+        elif len(email) > 254:
+            raise forms.ValidationError("Email address cannot be longer than 254 characters.")
+        elif not email.endswith('.com'):
+            raise forms.ValidationError("Please enter a valid email address.")
         return email
 
     def clean(self):
