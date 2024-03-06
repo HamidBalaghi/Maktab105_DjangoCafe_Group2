@@ -78,4 +78,21 @@ class UserRegistrationForm(forms.Form):
         password2 = cleaned_data.get("password2")
         if password1 != password2:
             raise forms.ValidationError("Passwords do not match.")
-        return cleaned_data
+        elif len(password1) < 8:
+            raise forms.ValidationError("Password must be at least 8 characters long.")
+        elif password1.isalpha() or password1.isdigit():
+            raise forms.ValidationError("Password must contain at least one letter and one number.")
+        elif not any(char.isdigit() for char in password1):
+            raise forms.ValidationError("Password must contain at least one number.")
+        elif not any(char.isalpha() for char in password1):
+            raise forms.ValidationError("Password must contain at least one letter.")
+        elif not any(char.isupper() for char in password1):
+            raise forms.ValidationError("Password must contain at least one uppercase letter.")
+        elif not any(char.islower() for char in password1):
+            raise forms.ValidationError("Password must contain at least one lowercase letter.")
+        elif not any(char in '!@#$%^&*()_+' for char in password1):
+            raise forms.ValidationError("Password must contain at least one special character.")
+        elif ' ' in password1:
+            raise forms.ValidationError("Password cannot contain spaces.")
+        else:
+            return cleaned_data
