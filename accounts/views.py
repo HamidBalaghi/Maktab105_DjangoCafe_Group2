@@ -77,9 +77,15 @@ class UserLogoutView(LoginRequiredMixin, View):
         """
         Logs out the user and redirects to the home page with a success message.
         """
-        logout(self.request)
-        messages.success(request, 'Logout successfully', extra_tags='success')
-        return redirect('home')
+        if request.user.profile.phone_number and request.user.profile.full_name:
+            logout(self.request)
+            messages.success(request, 'Logout successfully', extra_tags='success')
+            return redirect('home')
+        else:
+            messages.error(request,
+                           'You have not registered your phone number and full name yet must be seat after logout',
+                           extra_tags='error')
+            return redirect('creat_profile')
 
 
 class EditeUserView(LoginRequiredMixin, View):
@@ -181,7 +187,10 @@ class CreateProfileView(View):
             profile.user = request.user
             profile.save()
             messages.success(
-                request, f'Profile created for {profile}', extra_tags='success'
+                request,
+                f'Profile created for phone: {request.user.profile.phone_number} and '
+                f'full name: {request.user.profile.full_name}',
+                extra_tags='success'
             )
             # order = Order.objects.create(user=request.user)
             return redirect('home')
