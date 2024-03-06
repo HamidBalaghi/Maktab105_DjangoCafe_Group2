@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
@@ -141,10 +141,11 @@ class CreateUserView(View):
             password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password, first_name=first_name,
                                      last_name=last_name)
+            login(request, authenticate(username=username, password=password))
             messages.success(
                 request, f'Account created for {username}', extra_tags='success'
             )
-            return redirect('login')
+            return redirect('creat_profile')
         else:
             return render(request, self.template_name, {'form': form})
 
@@ -172,6 +173,7 @@ class CreateProfileView(View):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            # order = Order.objects.create(user=request.user)
             return redirect('home')
         return render(request, self.template_name, {'form': form})
 
@@ -235,13 +237,6 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         """
         profile_get_object = Profile.objects.get(user=self.request.user)
         return get_object_or_404(User, pk=self.kwargs['pk']) and profile_get_object
-
-
-# class ContactUsView(TemplateView):
-#     """
-#     Displays the contact us page.
-#     """
-#     template_name = 'contact/contact_us.html'
 
 
 class AboutUsView(TemplateView):
