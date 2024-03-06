@@ -38,7 +38,7 @@ class Profile(models.Model):
    'editable=False' prevents this field from being edited.
    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    phone_number = models.CharField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11)
     full_name = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True, editable=False)
     update_time = models.DateTimeField(auto_now=True, editable=False)

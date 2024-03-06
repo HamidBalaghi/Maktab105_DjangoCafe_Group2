@@ -51,7 +51,7 @@ class UserLoginView(LoginView):
         """
         Redirects authenticated users to the home page with a success message.
         """
-        if request.user.is_superuser:
+        if request.user.is_authenticated:
             messages.success(
                 request, 'You have already login successfully', extra_tags='success'
             )
