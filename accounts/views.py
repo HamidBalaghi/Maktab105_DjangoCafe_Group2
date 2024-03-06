@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
@@ -37,18 +37,26 @@ class UserLoginView(LoginView):
         """
         Add a success message after successful login.
         """
-        messages.success(self.request, 'You have logged in successfully', extra_tags='success')
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        if self.request.user.profile.phone_number and self.request.user.profile.full_name:
+            messages.success(self.request, 'You have logged in successfully.', extra_tags='success')
+        else:
+            messages.error(self.request,
+                           'You have not registered your phone number and full name yet. Please complete your profile.',
+                           extra_tags='error')
+            return redirect('creat_profile')
+        return response
 
     def dispatch(self, request, *args, **kwargs):
         """
         Redirects authenticated users to the home page with a success message.
         """
-        if request.user.is_authenticated:
+        if request.user.is_superuser:
             messages.success(
                 request, 'You have already login successfully', extra_tags='success'
             )
             return redirect('home')
+
         else:
             return super().dispatch(request, *args, **kwargs)
 
@@ -154,11 +162,11 @@ class CreateUserView(View):
             password = form.cleaned_data['password1']
             User.objects.create_user(username=username, email=email, password=password, first_name=first_name,
                                      last_name=last_name)
-            login(request, authenticate(username=username, password=password))
+            # login(request, authenticate(username=username, password=password))
             messages.success(
                 request, f'Account created for {username}', extra_tags='success'
             )
-            return redirect('creat_profile')
+            return redirect('login')
         else:
             return render(request, self.template_name, {'form': form})
 
