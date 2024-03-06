@@ -33,6 +33,13 @@ class UserLoginView(LoginView):
     redirect_authenticated_user = True
     next_page = reverse_lazy('home')
 
+    def form_valid(self, form):
+        """
+        Add a success message after successful login.
+        """
+        messages.success(self.request, 'You have logged in successfully', extra_tags='success')
+        return super().form_valid(form)
+
     def dispatch(self, request, *args, **kwargs):
         """
         Redirects authenticated users to the home page with a success message.
@@ -173,6 +180,9 @@ class CreateProfileView(View):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            messages.success(
+                request, f'Profile created for {profile}', extra_tags='success'
+            )
             # order = Order.objects.create(user=request.user)
             return redirect('home')
         return render(request, self.template_name, {'form': form})
