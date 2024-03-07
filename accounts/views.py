@@ -109,7 +109,7 @@ class EditeUserView(LoginRequiredMixin, View):
         form = self.form_class(
             instance=request.user.profile, initial={'email': request.user.email}
         )
-        return render(request, 'profile/chage_profile.html', {'form': form})
+        return render(request, 'profile/change_profile.html', {'form': form})
 
     def post(self, request):
         """
@@ -178,7 +178,6 @@ class CreateProfileView(View):
     template_name = 'profile/create_profile.html'
 
     def get(self, request):
-        print(f"profile get creat {request.user}")
         """
         Renders the form for creating a user profile.
         """
@@ -210,7 +209,7 @@ class ChangePasswordView(PasswordChangeView):
     Handles changing user password.
     """
     form_class = UserCreationForm
-    template_name = 'profile/chage_password.html'
+    template_name = 'profile/change_password.html'
     success_url = reverse_lazy("home")
 
     def get_form_kwargs(self):

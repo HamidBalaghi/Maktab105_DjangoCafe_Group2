@@ -25,7 +25,7 @@ class Profile(models.Model):
     'related_name' attribute allows accessing Profile objects from a User instance using 'user.profile'.
 
     phone number: Field to store the user's phone number.
-    'unique=True' ensures each phone number is unique.
+    'unique=True' ensures each phone number is not unique.
 
     full name: Field to store the user's full name
 
