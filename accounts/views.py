@@ -267,8 +267,3 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         return get_object_or_404(User, pk=self.kwargs['pk']) and profile_get_object
 
 
-class AboutUsView(TemplateView):
-    """
-    Displays the about us page.
-    """
-    template_name = 'about/about_coffe.html'
