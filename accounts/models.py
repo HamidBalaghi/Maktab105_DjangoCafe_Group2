@@ -44,7 +44,7 @@ class Profile(models.Model):
     update_time = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ['-update_time']
+        ordering = ["-update_time"]
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
