@@ -39,11 +39,3 @@ class Order(models.Model):
 
     def __str__(self):
         return f"ID: {self.id} | User: {self.user}"
-
-
-class ReserveTable(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    is_reserved = models.BooleanField(default=False)
-    reserved_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-    repay_time = models.DateTimeField(null=True, blank=True, auto_now=True)
