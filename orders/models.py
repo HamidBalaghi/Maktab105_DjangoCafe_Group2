@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from menu.models import Product, Table
-from .managers import PaidOrderManager
 
 
 # Create your models here.
@@ -29,7 +28,6 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_paid = models.BooleanField(default=False)
     paid_time = models.DateTimeField(null=True, blank=True, auto_now=True)
-    paid_object = PaidOrderManager()
     objects = models.Manager()
 
     @property
@@ -43,4 +41,9 @@ class Order(models.Model):
         return f"ID: {self.id} | User: {self.user}"
 
 
-
+class ReserveTable(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    is_reserved = models.BooleanField(default=False)
+    reserved_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    repay_time = models.DateTimeField(null=True, blank=True, auto_now=True)

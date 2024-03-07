@@ -5,6 +5,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, TemplateView
+
+from orders.models import Order
 from .forms import EditProfileForm, UserRegistrationForm, UserCreationForm, ProfileForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
@@ -160,12 +162,13 @@ class CreateUserView(View):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
-            User.objects.create_user(username=username, email=email, password=password, first_name=first_name,
-                                     last_name=last_name)
-            # login(request, authenticate(username=username, password=password))
+            new_user = User.objects.create_user(username=username, email=email, password=password,
+                                                first_name=first_name,
+                                                last_name=last_name)
             messages.success(
                 request, f'Account created for {username}', extra_tags='success'
             )
+            Order.objects.create(user=new_user)
             return redirect('login')
         else:
             return render(request, self.template_name, {'form': form})
