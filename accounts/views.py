@@ -202,7 +202,6 @@ class CreateProfileView(View):
                 f'full name: {request.user.profile.full_name}',
                 extra_tags='success'
             )
-            # order = Order.objects.create(user=request.user)
             return redirect('home')
         return render(request, self.template_name, {'form': form})
 
