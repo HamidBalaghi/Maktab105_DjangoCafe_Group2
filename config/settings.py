@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "menu.apps.ProductConfig",
     "orders.apps.OrdersConfig",
     "contact_us",
+    "reservetable",
 ]
 
 MIDDLEWARE = [

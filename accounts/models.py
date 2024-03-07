@@ -18,35 +18,45 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     """
-    Model representing additional information associated with a user.
+     Model representing additional information associated with a user.
 
-    user: One-to-one relationship with the User model.
-    If a User object is deleted, the associated Profile object will also be deleted.
-    'related_name' attribute allows accessing Profile objects from a User instance using 'user.profile'.
+     user: One-to-one relationship with the User model.
+     If a User object is deleted, the associated Profile object will also be deleted.
+     'related_name' attribute allows accessing Profile objects from a User instance using 'user.profile'.
 
-    phone number: Field to store the user's phone number.
-    'unique=True' ensures each phone number is unique.
+     phone number: Field to store the user's phone number.
+     'unique=True' ensures each phone number is unique.
 
-    full name: Field to store the user's full name
+     full name: Field to store the user's full name
 
-    create time: Field to store the creation time of the profile.
-    'auto_now_add=True' automatically sets the field to the current datetime when the object is first created.
+     create time: Field to store the creation time of the profile.
+     'auto_now_add=True' automatically sets the field to the current datetime when the object is first created.
+     'editable=False' prevents this field from being edited.
+
+    update time: Field to store the last update time of the profile.
+    'auto_now=True' automatically updates the field to the current datetime whenever the object is saved.
     'editable=False' prevents this field from being edited.
+    """
 
+<<<<<<< HEAD
    update time: Field to store the last update time of the profile.
    'auto_now=True' automatically updates the field to the current datetime whenever the object is saved.
    'editable=False' prevents this field from being edited.
    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone_number = models.CharField(max_length=11)
+=======
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    phone_number = models.CharField(max_length=11, unique=True)
+>>>>>>> 0c173de (i added reservation and i will compelete it)
     full_name = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True, editable=False)
     update_time = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ['-update_time']
-        verbose_name = 'Profile'
-        verbose_name_plural = 'Profiles'
+        ordering = ["-update_time"]
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
 
     def __str__(self):
         """Method to return a string representation of the Profile object."""

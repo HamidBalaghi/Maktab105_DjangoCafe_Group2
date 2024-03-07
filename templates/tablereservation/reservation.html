@@ -1,0 +1,14 @@
+{% extends "base/base.html" %} 
+
+{% block title %}
+<title>reserve table</title>
+{% endblock %} 
+
+{% block reserve %}
+{{tableid}}
+<form method="post" action="#" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="add">
+</form>
+{% endblock %}
