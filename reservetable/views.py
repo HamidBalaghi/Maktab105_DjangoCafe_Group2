@@ -24,10 +24,9 @@ class ReservedView(ListView, FormView):
         form = self.form_class(request.POST)
         if form.is_valid():
             table = form.cleaned_data["table_number"]
-            print(table.id)
             table.is_reserved = True
             new_table = Table.objects.get(id=table.id)
-            reserve = Reserve.objects.create(table=new_table, user=self.request.user)
+            Reserve.objects.create(table=new_table, user=self.request.user)
             table.save()
             messages.success(request, f"{table} table is Reserved for you")
         else:
