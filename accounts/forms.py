@@ -58,6 +58,10 @@ class UserRegistrationForm(forms.Form):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username is already taken.")
+        elif len(username) < 5:
+            raise forms.ValidationError("Username must be at least 5 characters long.")
+        elif len(username) > 50:
+            raise forms.ValidationError("Username cannot be longer than 150 characters.")
         return username
 
     def clean_email(self):
@@ -67,6 +71,18 @@ class UserRegistrationForm(forms.Form):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email address is already registered.")
+        elif not email.endswith('@gmail.com') or email.endswith('@yahoo.com'):
+            raise forms.ValidationError("Please use a gmail address.")
+        elif '@' not in email:
+            raise forms.ValidationError("Please enter a valid email address.")
+        elif ' ' in email:
+            raise forms.ValidationError("Email address cannot contain spaces.")
+        elif len(email) < 1:
+            raise forms.ValidationError("Email address must be at least 1 characters long.")
+        elif len(email) > 254:
+            raise forms.ValidationError("Email address cannot be longer than 254 characters.")
+        elif not email.endswith('.com'):
+            raise forms.ValidationError("Please enter a valid email address.")
         return email
 
     def clean(self):
@@ -78,4 +94,21 @@ class UserRegistrationForm(forms.Form):
         password2 = cleaned_data.get("password2")
         if password1 != password2:
             raise forms.ValidationError("Passwords do not match.")
-        return cleaned_data
+        elif len(password1) < 8:
+            raise forms.ValidationError("Password must be at least 8 characters long.")
+        elif password1.isalpha() or password1.isdigit():
+            raise forms.ValidationError("Password must contain at least one letter and one number.")
+        elif not any(char.isdigit() for char in password1):
+            raise forms.ValidationError("Password must contain at least one number.")
+        elif not any(char.isalpha() for char in password1):
+            raise forms.ValidationError("Password must contain at least one letter.")
+        elif not any(char.isupper() for char in password1):
+            raise forms.ValidationError("Password must contain at least one uppercase letter.")
+        elif not any(char.islower() for char in password1):
+            raise forms.ValidationError("Password must contain at least one lowercase letter.")
+        elif not any(char in '!@#$%^&*()_+' for char in password1):
+            raise forms.ValidationError("Password must contain at least one special character.")
+        elif ' ' in password1:
+            raise forms.ValidationError("Password cannot contain spaces.")
+        else:
+            return cleaned_data

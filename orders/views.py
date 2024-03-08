@@ -11,7 +11,7 @@ class AllOrders(ListView):
     template_name = 'basket/allcarts.html'
 
     def get_queryset(self):
-        return Order.objects.filter(is_paid=False)
+        return Order.objects.filter(user=self.request.user)
 
 
 class OrderDetail(UpdateView):
@@ -26,6 +26,7 @@ class OrderDetail(UpdateView):
             order = Order.objects.get(id=self.object.id)
             order.is_paid = True
             order.save()
+            Order.objects.create(user=self.request.user)
         elif 'clearCart' in result:
             order = Order.objects.get(id=self.object.id)
             for item in order.order_items.all():

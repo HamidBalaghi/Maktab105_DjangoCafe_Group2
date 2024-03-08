@@ -25,7 +25,7 @@ class Profile(models.Model):
     'related_name' attribute allows accessing Profile objects from a User instance using 'user.profile'.
 
     phone number: Field to store the user's phone number.
-    'unique=True' ensures each phone number is unique.
+    'unique=True' ensures each phone number is not unique.
 
     full name: Field to store the user's full name
 
@@ -38,13 +38,13 @@ class Profile(models.Model):
    'editable=False' prevents this field from being edited.
    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    phone_number = models.CharField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11)
     full_name = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True, editable=False)
     update_time = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ['-update_time']
+        ordering = ["-update_time"]
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 

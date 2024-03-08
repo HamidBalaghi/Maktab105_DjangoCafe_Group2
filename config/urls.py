@@ -24,4 +24,5 @@ urlpatterns = [
     path("menu/", include("menu.urls")),
     path("cart/", include("orders.urls")),
     path("", include("contact_us.urls")),
+    path("", include("reservetable.urls")),
 ]

@@ -28,3 +28,4 @@ class Category(models.Model):
 
 class Table(models.Model):
     id = models.AutoField(primary_key=True)
+    is_reserved = models.BooleanField(default=False)
