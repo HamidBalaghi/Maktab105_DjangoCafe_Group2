@@ -3,13 +3,13 @@
 {% endblock %} {% block contactus %}
 <div class="flex items-center justify-center p-12">
     <div class="mx-auto w-full max-w-[550px]">
-        {% if messages %}
+        <!-- {% if messages %}
         <ul class="messages">
             {% for message in messages %}
             <li class="bg-green-200 text-green-800 rounded-md p-2 mb-2">{{ message }}</li>
             {% endfor %}
         </ul>
-        {% endif %}
+        {% endif %} -->
         <form method="POST">
             {% csrf_token %}
             <div class="mb-5">

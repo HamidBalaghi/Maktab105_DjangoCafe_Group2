@@ -1,5 +1,5 @@
 from django.db import models
-from .managers import ActiveProductManager
+from .managers import ActiveProductManager, InactiveProductManager
 
 
 class Product(models.Model):
@@ -11,6 +11,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField("Category", related_name="products")
     active_objects = ActiveProductManager()
+    inactive_objects = InactiveProductManager()
 
     def __str__(self):
         return self.name
