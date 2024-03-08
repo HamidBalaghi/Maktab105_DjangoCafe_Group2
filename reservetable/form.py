@@ -1,11 +1,10 @@
 from django import forms
 from .models import Reserve
+from menu.models import Table
 
 
-class TableNumberForm(forms.ModelForm):
+class TableNumberForm(forms.Form):
 
-    TableNumbers = forms.IntegerField(min_value=0)
+    table_number = forms.ModelChoiceField(Table.objects.filter(is_reserved=False))
 
-    class Meta:
-        model = Reserve
-        fields = []
+

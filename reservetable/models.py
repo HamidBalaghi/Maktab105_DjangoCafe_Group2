@@ -10,6 +10,3 @@ class Reserve(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     reserved_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     repay_time = models.DateTimeField(null=True, blank=True, auto_now=True)
-
-
-

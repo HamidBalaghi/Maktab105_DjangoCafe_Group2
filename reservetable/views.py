@@ -8,6 +8,8 @@ from django.views.generic.edit import FormView
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from menu.models import Table
+from django.contrib import messages
+
 
 class ReservedView(ListView, FormView):
     model = Reserve
@@ -16,20 +18,18 @@ class ReservedView(ListView, FormView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['tableid'] = Table.objects.all()
         return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            table_number = form.cleaned_data["TableNumbers"]
-            table = Table.objects.get(id=table_number)
-            if table.is_reserved == True:
-                raise PermissionDenied("this table is reserved")
-            else:
-                table.is_reserved = True
-                table.save()
-            return HttpResponse("Success: Table is reserved.")
+            table = form.cleaned_data["table_number"]
+            print(table.id)
+            table.is_reserved = True
+            new_table = Table.objects.get(id=table.id)
+            reserve = Reserve.objects.create(table=new_table, user=self.request.user)
+            table.save()
+            messages.success(request, f"{table} table is Reserved for you")
         else:
             return HttpResponse("Error: Form is invalid. Please try again.")
         return redirect("home")
