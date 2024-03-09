@@ -5,7 +5,7 @@
 {% block cart %}
     <div class="max-w-2xl mx-auto shadow-md rounded-lg overflow-hidden mt-4 mb-4">
         <div class="bg-gray-800 flex justify-between text-white p-4 text-lg font-bold ">
-            <span>{{order.user.username}}</span>  
+            <span>{{order.user.get_full_name}}</span>  
             <span class="text-gray-300">Cafe Maktab </span>
         </div>
         <div class="p-4">
