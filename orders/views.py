@@ -27,6 +27,12 @@ class OrderDetail(UpdateView):
             raise Http404("You do not have permission to view this order.")
         return obj
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.is_paid:
+            return redirect(reverse_lazy('paid', kwargs={'pk': obj.pk}))
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         result = (list(request.POST)[1])
