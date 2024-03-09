@@ -1,5 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import ListView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, UpdateView, DetailView
 
 from orders.models import Order, OrderItem
 
@@ -11,7 +14,7 @@ class AllOrders(ListView):
     template_name = 'basket/allcarts.html'
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        return Order.objects.filter(user=self.request.user).order_by('-id')
 
 
 class OrderDetail(UpdateView):
@@ -47,3 +50,20 @@ class OrderDetail(UpdateView):
             item.save()
 
         return self.render_to_response(self.get_context_data())
+
+
+class PaidOrderDetail(LoginRequiredMixin, DetailView):
+    model = Order
+    template_name = 'basket/paid.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not obj.is_paid:
+            return redirect(reverse_lazy('detail', kwargs={'pk': obj.pk}))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404("You do not have permission to view this order.")
+        return obj
