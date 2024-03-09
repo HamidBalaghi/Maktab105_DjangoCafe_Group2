@@ -37,5 +37,9 @@ class Order(models.Model):
             total += item.total_price_item
         return total
 
+    @property
+    def factor_code(self):
+        return self.id + 1000
+
     def __str__(self):
         return f"ID: {self.id} | User: {self.user}"
