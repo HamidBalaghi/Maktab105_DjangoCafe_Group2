@@ -40,8 +40,8 @@ class TransactionView(View):
             return HttpResponse('already exists')
 
 
-class AdminCustom(View):
-    def get(self,request):
-        all_products = Product.objects.all()
-        return render(request,"admin/base.html",context={'all_products':all_products})
+# class AdminCustom(View):
+#     def get(self,request):
+#         all_products = Product.objects.all()
+#         return render(request,"admin/base.html",context={'all_products':all_products})
 
