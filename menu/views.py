@@ -21,9 +21,9 @@ class TransactionView(View):
 
     def get(self,request,id):
 
-        if not Order.objects.filter(user=request.user, ).exists():
-            create_order= Order.objects.create(user=request.user,  )
-            create_order.save()
+        # if not Order.objects.filter(user=request.user, ).exists():
+        #     create_order= Order.objects.create(user=request.user,  )
+        #     create_order.save()
 
         get_product=Product.objects.get(id=id)
         get_user = User.objects.get(username=request.user)
