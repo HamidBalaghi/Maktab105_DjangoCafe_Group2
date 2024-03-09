@@ -17,11 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from menu.views import AdminCustom
+# from menu.views import AdminCustom
 urlpatterns = [
 
     path("admin/", admin.site.urls),
-    path('custom-admin/', AdminCustom.as_view(), name='custom_admin'),
+    # path('custom-admin/', AdminCustom.as_view(), name='custom_admin'),
     path("", include("accounts.urls")),
     path("menu/", include("menu.urls")),
     path("cart/", include("orders.urls")),
