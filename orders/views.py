@@ -3,7 +3,6 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, DetailView
-
 from orders.models import Order, OrderItem
 
 
@@ -21,6 +20,12 @@ class OrderDetail(UpdateView):
     model = Order
     fields = '__all__'
     template_name = 'basket/cart.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404("You do not have permission to view this order.")
+        return obj
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
