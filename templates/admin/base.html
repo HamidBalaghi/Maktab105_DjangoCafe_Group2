@@ -2,7 +2,7 @@
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/ag-charts-community/dist/umd/ag-charts-community.js"></script>
+{#    <script src="https://cdn.jsdelivr.net/npm/ag-charts-community/dist/umd/ag-charts-community.js"></script>#}
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
 {% block dark-mode-vars %}
@@ -98,23 +98,23 @@
         {% endblock messages %}
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
-        <div>
-        {% for item in all_products %}
-        <a href="{% url 'transaction' item.id %}">
-        <div
-            class="flex flex-col justify-content items-center w-full h-full bg-white p-4 rounded-lg bg-gradient-to-br from-blue-500 to-gray-500 hover:bg-gradient-to-tl from-gray-200 to-blue-200 shadow-2xl shadow-gray-900"
-        >
-            <img class="w-1/2 h-1/2 m-auto" src="{{item.image.url}}" alt="" />
-            <h2>{{item.name}}</h2>
-            {% for i in item.category.all %}
-                <p>{{i.name}}</p>
-            {% endfor %}
-            <p>{{item.description}}</p>
-            <p>{{item.price}}</p>
-        </div>
-        </a>        
-        {% endfor %}
-        </div>
+{#        <div>#}
+{#        {% for item in all_products %}#}
+{#        <a href="{% url 'transaction' item.id %}">#}
+{#        <div#}
+{#            class="flex flex-col justify-content items-center w-full h-full bg-white p-4 rounded-lg bg-gradient-to-br from-blue-500 to-gray-500 hover:bg-gradient-to-tl from-gray-200 to-blue-200 shadow-2xl shadow-gray-900"#}
+{#        >#}
+{#            <img class="w-1/2 h-1/2 m-auto" src="{{item.image.url}}" alt="" />#}
+{#            <h2>{{item.name}}</h2>#}
+{#            {% for i in item.category.all %}#}
+{#                <p>{{i.name}}</p>#}
+{#            {% endfor %}#}
+{#            <p>{{item.description}}</p>#}
+{#            <p>{{item.price}}</p>#}
+{#        </div>#}
+{#        </a>        #}
+{#        {% endfor %}#}
+{#        </div>#}
        
             <div id="myChart"></div>
           {% block pretitle %}{% endblock %}
@@ -126,27 +126,27 @@
           {% endblock %}
           {% block sidebar %}{% endblock %}
           <br class="clear">
-        <script>
-                        // Chart Options
-            const options = {
-                // Container: HTML Element to hold the chart
-                container: document.getElementById('myChart'),
-                // Data: Data to be displayed in the chart
-                data: [
-                    { month: 'Jan', avgTemp: 2.3, iceCreamSales: 162000 },
-                    { month: 'Mar', avgTemp: 6.3, iceCreamSales: 302000 },
-                    { month: 'May', avgTemp: 16.2, iceCreamSales: 800000 },
-                    { month: 'Jul', avgTemp: 22.8, iceCreamSales: 1254000 },
-                    { month: 'Sep', avgTemp: 14.5, iceCreamSales: 950000 },
-                    { month: 'Nov', avgTemp: 8.9, iceCreamSales: 200000 },
-                ],
-                // Series: Defines which chart type and data to use
-                series: [{ type: 'bar', xKey: 'month', yKey: 'iceCreamSales' }],
-            };
-            
-            // Create Chart
-            const chart = agCharts.AgCharts.create(options);
-        </script>
+{#        <script>#}
+{#                        // Chart Options#}
+{#            const options = {#}
+{#                // Container: HTML Element to hold the chart#}
+{#                container: document.getElementById('myChart'),#}
+{#                // Data: Data to be displayed in the chart#}
+{#                data: [#}
+{#                    { month: 'Jan', avgTemp: 2.3, iceCreamSales: 162000 },#}
+{#                    { month: 'Mar', avgTemp: 6.3, iceCreamSales: 302000 },#}
+{#                    { month: 'May', avgTemp: 16.2, iceCreamSales: 800000 },#}
+{#                    { month: 'Jul', avgTemp: 22.8, iceCreamSales: 1254000 },#}
+{#                    { month: 'Sep', avgTemp: 14.5, iceCreamSales: 950000 },#}
+{#                    { month: 'Nov', avgTemp: 8.9, iceCreamSales: 200000 },#}
+{#                ],#}
+{#                // Series: Defines which chart type and data to use#}
+{#                series: [{ type: 'bar', xKey: 'month', yKey: 'iceCreamSales' }],#}
+{#            };#}
+{#            #}
+{#            // Create Chart#}
+{#            const chart = agCharts.AgCharts.create(options);#}
+{#        </script>#}
         </div>
         <!-- END Content -->
         {% block footer %}<div id="footer"></div>{% endblock %}
