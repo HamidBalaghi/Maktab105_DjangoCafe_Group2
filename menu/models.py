@@ -1,5 +1,6 @@
 from django.db import models
 from .managers import ActiveProductManager, InactiveProductManager
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -28,6 +29,7 @@ class Category(models.Model):
 
 class Table(models.Model):
     id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     is_reserved = models.BooleanField(default=False)
 
     def __str__(self):
