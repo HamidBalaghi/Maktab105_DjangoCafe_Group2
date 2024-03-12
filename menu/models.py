@@ -11,8 +11,12 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField("Category", related_name="products")
-    active_objects = ActiveProductManager()
-    inactive_objects = InactiveProductManager()
+    # active_objects = ActiveProductManager()
+    # inactive_objects = InactiveProductManager()
+    # objects = models.Manager()
+
+
+
 
     def __str__(self):
         return self.name
@@ -20,7 +24,7 @@ class Product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="category_images/", null=True, blank=True)
+    image = models.ImageField(upload_to="menu/category_images/", null=True, blank=True)
     sub_of = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):

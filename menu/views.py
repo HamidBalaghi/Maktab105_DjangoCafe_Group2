@@ -2,11 +2,22 @@ from django.views.generic import ListView, View,DetailView
 from django.shortcuts import render ,HttpResponse,redirect
 from .models import *
 from orders.models import *
+from django.db.models import Q
 
 class CategoryView(ListView):
     model = Category
     template_name = 'menu/categories.html'
     context_object_name = 'categories_list'
+
+    def get_queryset(self):
+        if self.request.GET.get("q")!=None:
+            query = self.request.GET.get('q')
+            return (Category.objects.filter(
+                Q(name__icontains=query)
+            ))
+
+        else:
+            return Category.objects.all()
 
 
 class ProductView(View):
@@ -45,3 +56,14 @@ class TransactionView(View):
 #         all_products = Product.objects.all()
 #         return render(request,"admin/base.html",context={'all_products':all_products})
 
+
+
+# class SearchView(ListView):
+#     model = Product
+#     template_name = 'menu'
+#     context_object_name = ''
+#     def get_queryset(self):
+#         query = self.request.GET.get('q')
+#         return Product.objects.filter(
+#             Q(name__icontains=query) | Q(description__icontains=query)
+#         )
