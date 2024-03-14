@@ -27,6 +27,7 @@ urlpatterns = [
     path("cart/", include("orders.urls")),
     path("", include("contact_us.urls")),
     path("", include("reservetable.urls")),
+    path('', include('core.urls')),
 
 
 
